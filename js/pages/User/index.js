@@ -7,10 +7,7 @@ import {
   TouchableOpacity
 } from 'react-native'
 import NavigationBar from '../../component/NavigationBar'
-import Ionicons from 'react-native-vector-icons/Ionicons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
-import EvilIcons from 'react-native-vector-icons/EvilIcons'
-import LinearGradient from 'react-native-linear-gradient';
 
 const THEME_COLOR = '#ffa631'
 export default class User extends Component {

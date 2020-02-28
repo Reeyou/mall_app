@@ -41,10 +41,10 @@ export const TabNavigator = createAppContainer(
       Discover: {
         screen: Discover,
         navigationOptions: {
-          tabBarLabel: '购物车',
+          tabBarLabel: '发现',
           tabBarIcon: ({ focused, tintColor }) => (
             <Image
-              source={focused ? require(`../assets/tabBar/cart.png`) : require(`../assets/tabBar/cart-off.png`)}
+              source={focused ? require(`../assets/tabBar/information.png`) : require(`../assets/tabBar/information-off.png`)}
               style={styles.tabIcon}
             />
           )
@@ -53,10 +53,10 @@ export const TabNavigator = createAppContainer(
       ShopCart: {
         screen: ShopCart,
         navigationOptions: {
-          tabBarLabel: '发现',
+          tabBarLabel: '购物车',
           tabBarIcon: ({ focused, tintColor }) => (
             <Image
-              source={focused ? require(`../assets/tabBar/information.png`) : require(`../assets/tabBar/information-off.png`)}
+              source={focused ? require(`../assets/tabBar/cart.png`) : require(`../assets/tabBar/cart-off.png`)}
               style={styles.tabIcon}
             />
           )

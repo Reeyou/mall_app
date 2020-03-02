@@ -30,12 +30,6 @@ export default class Discover extends Component {
     return <TouchableOpacity
       style={{ flexDirection: 'row' }}
     >
-      <Ionicons
-        name={'ios-qr-scanner'}
-        size={26}
-        style={{ color: 'white', marginRight: 10 }}
-      />
-
       <AntDesign
         name={'message1'}
         size={26}

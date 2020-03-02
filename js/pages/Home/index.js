@@ -14,6 +14,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import LinearGradient from 'react-native-linear-gradient';
 import ScrollTab from './ScrollTab'
+import Slider from './Recommend/slider'
 
 const THEME_COLOR = '#ffa631'
 const LOCATION = '上海市'
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginLeft: 10,
-    marginRight: 10
+    marginRight: 10,
   },
   TextInput: {
     fontSize: 13,
@@ -147,18 +148,19 @@ const styles = StyleSheet.create({
     height: 34,
     borderColor: 'white',
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 14,
     padding: 0,
     paddingLeft: 26,
     paddingRight: 10,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    zIndex: -999,
   },
   search: {
     color: '#bbb',
     position: 'absolute',
     top: 6,
-    left: 2,
-    zIndex: 99
+    left: -10,
+    zIndex: 999
   },
   tabStyle: {
     flex: 1,

@@ -4,17 +4,28 @@ import {
   View,
   Text
 } from 'react-native'
+import Recommend from './Recommend'
 
 export default class ScrollTab extends Component {
   constructor(props) {
     super(props)
   }
 
+  renderView() {
+    switch(this.props.tabLable) {
+      case '推荐':
+        return <Recommend />
+        break;
+      default:
+        break;
+    }
+  }
   render() {
+    console.log(this.props)
     return (
-      <TouchableOpacity>
-        <Text>{this.props.tabLable}</Text>
-      </TouchableOpacity>
+      <View>
+        {this.renderView()}
+      </View>
     )
   }
 }

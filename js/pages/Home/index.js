@@ -8,17 +8,14 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native'
-import { createAppContainer } from 'react-navigation'
-import { createMaterialTopTabNavigator } from 'react-navigation-tabs'
 import NavigationBar from '../../component/NavigationBar'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import LinearGradient from 'react-native-linear-gradient';
-import ScrollTab from './ScrollTab'
-import Slider from './Recommend/slider'
-import Menu from './Recommend/Menu/index'
-import Swiper from 'react-native-swiper';
+import Banner from './Banner'
+import Menu from './Menu'
+import GoodsList from './GoodsList';
 
 const THEME_COLOR = '#678'
 const LOCATION = '上海市'
@@ -80,7 +77,7 @@ export default class Home extends Component {
     return <View style={styles.banner_container}>
       <Image
         style={styles.banner}
-        source={require('./Recommend/img/2.jpg')}
+        source={require('./Demo/img/2.jpg')}
         resizeMode='cover'
       />
     </View>
@@ -95,105 +92,6 @@ export default class Home extends Component {
     return (
       <View>
 
-      </View>
-    )
-  }
-  getBaseItem() {
-    return (
-      <View style={styles.base_item}>
-        <Image
-          style={styles.itemPic}
-          source={require('./item/item2.png')}
-          resizeMode='contain'
-        />
-        <View style={styles.topContainer}>
-          <View style={styles.leftStyle}>
-            <Image
-              style={styles.leftPic}
-              source={require('./Recommend/img/2.jpg')}
-              resizeMode='cover'
-            />
-            <Text style={styles.leftLabel}>精致甜美短外套，小资优雅显魔力</Text>
-          </View>
-          <View style={styles.rightStyle}>
-            <View style={styles.labelContainer}>
-              <Text style={styles.item_line}></Text>
-              <Text style={styles.item_label}>游戏笔电</Text>
-              <Text style={styles.item_line}></Text>
-            </View>
-            <View style={styles.smallPicWrapper}>
-              <Image style={styles.smallPic}
-                source={require('./Recommend/img/2.jpg')}
-                resizeMode='cover' />
-              <Image style={styles.smallPic}
-                source={require('./Recommend/img/2.jpg')}
-                resizeMode='cover' />
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.bottomContainer}>
-          <View style={styles.b_l_container}>
-            <Text style={styles.mainTitle}>酷玩科技</Text>
-            <Text style={styles.subTitle}>大疆首款运动相机体验</Text>
-            <View style={[styles.smallPicWrapper, styles.b_l_picWrapper]}>
-              <Image style={styles.smallPic}
-                source={require('./Recommend/img/2.jpg')}
-                resizeMode='cover' />
-              <Image style={styles.smallPic}
-                source={require('./Recommend/img/2.jpg')}
-                resizeMode='cover' />
-            </View>
-          </View>
-          <View style={styles.b_r_container}>
-            <View>
-              <Text style={styles.mainTitle}>免息星球</Text>
-              <Text style={styles.subTitle}>白条免息购</Text>
-              <Image style={[styles.smallPic, styles.b_r_smallPic]}
-                source={require('./Recommend/img/2.jpg')}
-                resizeMode='cover' />
-            </View>
-            <View>
-              <Text style={styles.mainTitle}>运动户外</Text>
-              <Text style={styles.subTitle}>硬核穿搭</Text>
-              <Image style={[styles.smallPic, styles.b_r_smallPic]}
-                source={require('./Recommend/img/2.jpg')}
-                resizeMode='cover' />
-            </View>
-          </View>
-        </View>
-      </View>
-    )
-  }
-
-  renderRecommend() {
-    return (
-      <View style={[styles.base_item,styles.recommend]}>
-        <Image
-          style={styles.itemPic}
-          source={require('./item/item2.png')}
-          resizeMode='contain'
-        />
-        <View style={styles.recommend_container}>
-          <View style={styles.recommend_item}>
-            <Image
-              style={styles.recommend_img}
-              source={require('./Recommend/img/5.jpg')}
-              resizeMode='cover'
-            />
-            <Text numberOfLines={2} style={styles.name}>【新连接领专属礼】莱蒂卡森 实木床1.8米双人床北欧软包背靠1.5单人床</Text>
-            <Text style={styles.price_wrapper}>￥<Text style={styles.price}>390</Text>.00</Text>
-          </View>
-          <View style={styles.recommend_item}>
-            <Image
-              style={styles.recommend_img}
-              source={require('./Recommend/img/2.jpg')}
-              resizeMode='cover'
-            />
-            <Text numberOfLines={2} style={styles.name}>【新连接领专属礼】莱蒂卡森 实木床1.8米双人床北欧软包背靠1.5单人床</Text>
-            <Text style={styles.price_wrapper}>￥<Text style={styles.price}>390</Text>.00</Text>
-          </View>
-        </View>
       </View>
     )
   }
@@ -212,13 +110,14 @@ export default class Home extends Component {
     return (
       <ScrollView style={styles.container}>
         {navigationBar}
-        <Slider />
+        <Banner />
         <Menu />
         {this.getBanner()}
-        {this.getBaseItem()}
-        {this.getBaseItem()}
-        {this.getBaseItem()}
-        {this.renderRecommend()}
+        <GoodsList />
+        <GoodsCard />
+        <GoodsCard />
+        <GoodsCard />
+        <GoodsList />
       </ScrollView>
     )
   }
@@ -287,10 +186,8 @@ const styles = StyleSheet.create({
   indicatorContainer: {
     alignItems: 'center'
   },
-
-
-  // banner
-  banner_container: {
+   // banner
+   banner_container: {
     paddingLeft: 8,
     paddingRight: 8,
   },
@@ -298,144 +195,5 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 120,
     borderRadius: 10,
-  },
-
-  // baseitem
-  base_item: {
-    textAlign: 'center',
-    paddingLeft: 8,
-    paddingRight: 8,
-  },
-  itemPic: {
-    width: '100%',
-    height: 50,
-  },
-  topContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-
-  },
-  leftStyle: {
-    flex: 1,
-    marginRight: 2,
-  },
-  rightStyle: {
-    flex: 1,
-    marginLeft: 2,
-    backgroundColor: 'pink',
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
-  },
-  leftPic: {
-    width: '100%',
-    height: 130,
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
-  },
-  leftLabel: {
-    position: 'absolute',
-    bottom: 10,
-    left: 10,
-    right: 10,
-    color: 'white'
-  },
-  labelContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginTop: 10
-  },
-  item_line: {
-    width: 20,
-    height: 2,
-    backgroundColor: 'white'
-  },
-  item_label: {
-    textAlign: 'center',
-    color: 'white'
-  },
-  smallPicWrapper: {
-    flexDirection: 'row',
-    marginTop: 8,
-    paddingLeft: 10,
-    paddingRight: 10
-  },
-  smallPic: {
-    width: 80,
-    height: 80,
-    marginLeft: 5,
-    marginRight: 5,
-    borderRadius: 6
-  },
-  bottomContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  b_r_container: {
-    flex: 1,
-    marginLeft: 2,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    backgroundColor: 'white'
-  },
-  b_l_container: {
-    flex: 1,
-    backgroundColor: 'white',
-    marginRight: 2,
-  },
-  b_l_picWrapper: {
-    paddingLeft: 4,
-    marginTop: 4,
-    paddingBottom: 10
-  },
-  mainTitle: {
-    marginTop: 5,
-    fontSize: 14,
-    paddingLeft: 10,
-  },
-  subTitle: {
-    fontSize: 10,
-    color: '#aaa',
-    paddingLeft: 10,
-  },
-  b_r_smallPic: {
-    marginTop: 4
-  },
-
-  // recommend
-  recommend: {
-    marginBottom: 20
-  },
-  recommend_container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  recommend_item: {
-    width: '49.5%',
-    backgroundColor: 'white',
-    borderRadius: 10
-  },
-  recommend_img: {
-    width: "100%",
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    // height: 100,
-  },
-  name: {
-    fontSize: 14,
-    paddingLeft: 5,
-    paddingRight: 5,
-    marginTop: 5,
-    marginBottom: 5
-  },
-  price_wrapper: {
-    color: 'red',
-    paddingLeft: 5
-  },
-  price: {
-    fontSize: 16,
-    
   }
 })

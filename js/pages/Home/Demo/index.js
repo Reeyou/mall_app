@@ -4,7 +4,7 @@ import {
   Text,
   View
 } from 'react-native';
-import Slider from './slider'
+import Banner from '../Banner'
 import MyCarousel from './Carousel'
 
 export default class Recommend extends Component {

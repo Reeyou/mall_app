@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from './node_modules/react';
 import {
   StyleSheet,
   Text,
@@ -10,7 +10,7 @@ import {
 import Swiper from 'react-native-swiper';
 const { width } = Dimensions.get('window');
 const DOT_WIDTH = 8
-export default class Slider extends Component {
+export default class Banner extends Component {
   constructor(props) {
     super(props)
     this.state = {

@@ -4,7 +4,7 @@ import {
   View,
   Text
 } from 'react-native'
-import Recommend from './Recommend'
+import Recommend from './Demo'
 
 export default class ScrollTab extends Component {
   constructor(props) {

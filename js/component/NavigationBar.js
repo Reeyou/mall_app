@@ -73,21 +73,25 @@ export default class NavigationBar extends Component {
         </View> : null
 
     return (
-        <LinearGradient
-        // fa8c35 橙色
-        // ff8936 橘黄
-        // ffa400 橙黄
-        // ffa631 杏黄
-        // ff7500
-        // ffab87
-        // #ff4e47
-          start={{ x: 0.56, y: 0 }}
-          // locations={[0,1]}
-          colors={['#ff4e47', '#ffab87']}
-        >
+        // <LinearGradient
+        // // fa8c35 橙色
+        // // ff8936 橘黄
+        // // ffa400 橙黄
+        // // ffa631 杏黄
+        // // ff7500
+        // // ffab87
+        // // #ff4e47
+        //   start={{ x: 0.56, y: 0 }}
+        //   // locations={[0,1]}
+        //   colors={['#ff4e47', '#ffab87']}
+        // >
+        //   {statusBar}
+        //   {navBar}
+        // </LinearGradient>
+        <View>
           {statusBar}
           {navBar}
-        </LinearGradient>
+        </View>
     )
   }
 }
@@ -100,7 +104,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingRight: 16,
     paddingLeft: 16,
-    height: 50
+    height: 50,
+    position: 'relative',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    elevation: 999, // andriod设置层级
   },
   navContent: {
     flex: 1,

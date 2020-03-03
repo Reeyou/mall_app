@@ -14,8 +14,7 @@ export default class ScrollTab extends Component {
   renderView() {
     switch(this.props.tabLable) {
       case '推荐':
-        return <Recommend />
-        break;
+        return <Recommend />;
       default:
         break;
     }

@@ -76,6 +76,8 @@ export const TabNavigator = createAppContainer(
       }
     },
     {
+      lazyLoad: true,
+      // swipeEnabled: false,
       tabBarOptions: {
         activeTintColor: '#ff461f',
         labelStyle: {

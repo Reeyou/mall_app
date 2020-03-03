@@ -8,19 +8,21 @@ import Slider from './slider'
 import MyCarousel from './Carousel'
 
 export default class Recommend extends Component {
-
+  
+  
   render() {
-    return (
-      // <View style={styles.recommend_container}>
-      //   <Text>test</Text>
-        <MyCarousel />
-      // </View>
-    );
+        return (
+          <View style={styles.recommend_container}>
+            {/* <Text>home</Text> */}
+            <Slider />
+            {/* <MyCarousel /> */}
+          </View>
+        )
   }
 }
 
 const styles = StyleSheet.create({
   recommend_container: {
-    // flex: 1,
+    flex: 1,
   },
 });

@@ -16,6 +16,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Banner from './Banner'
 import Menu from './Menu'
 import GoodsList from './GoodsList';
+import GoodsCard from './GoodsCard';
 
 const THEME_COLOR = '#678'
 const LOCATION = '上海市'
@@ -23,6 +24,12 @@ const TABS = ['推荐', '手机专区', '服饰专区', '母婴专区', '电脑�
 export default class Home extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      navBarStyle: {
+        backgroundColor: "transparent",
+      },
+      statusBarbackgroundColor:  "transparent"
+    }
   }
   getLeftButton() {
     return <TouchableOpacity
@@ -95,25 +102,66 @@ export default class Home extends Component {
       </View>
     )
   }
+  _onScroll(e) {
+    let y = e.nativeEvent.contentOffset.y
+    let opacityPercent = y / 200
+    if (y > 10) {
+      // this.navBar.setNativeProps({
+      //   style: {backgroundColor: 'red' }
+      // })
+      console.log("===================")
+      this.setState({
+        navBarStyle: {
+          backgroundColor: '#FF9100'
+        },
+        statusBarbackgroundColor: 'white'
+      })
+    } else {
+      this.setState({
+        navBarStyle: {
+          backgroundColor: 'transparent'
+        },
+        statusBarbackgroundColor: 'transparent'
+      })
+    }
+  }
+  onStop = (e) => {
+    let { x, y } = e.nativeEvent.contentOffset;
+    if (y < px2dp(50)) {
+      this._scrollView.scrollTo({ x: 0, y: 0, animated: true })
+    } else if (y < px2dp(100)) {
+      this._scrollView.scrollTo({ x: 0, y: px2dp(100), animated: true })
+    }
+  }
+
   render() {
     let statusBar = {
-      backgroundColor: THEME_COLOR,
-      barStyle: 'light-content',
+      // backgroundColor: this.state.statusBarbackgroundColor, // 单独设置吸顶状态栏样式
     }
     let navigationBar = <NavigationBar
       statusBar={statusBar}
       renderLeftContent={this.getLeftButton()}
       renderRightButton={this.getRightButton()}
       searchInput={this.getSearchInput()}
-      style={{ backgroundColor: THEME_COLOR }}
+      style={this.state.navBarStyle}
     />
+    let test = <View
+      ref={ref => this.navBar = ref}
+      style={{ height: 100, backgroundColor: 'red', opacity: 1 }}
+    ><Text>sdhfkdsjfsdj</Text></View>
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        showsVerticalScrollIndicator={false}
+        stickyHeaderIndices={[0]}
+        onScrollEndDrag={this.onStop}
+        onScroll={this._onScroll.bind(this)}
+        ref={(component) => { this._scrollView = component }}
+      >
         {navigationBar}
         <Banner />
         <Menu />
         {this.getBanner()}
-        <GoodsList />
         <GoodsCard />
         <GoodsCard />
         <GoodsCard />
@@ -186,8 +234,8 @@ const styles = StyleSheet.create({
   indicatorContainer: {
     alignItems: 'center'
   },
-   // banner
-   banner_container: {
+  // banner
+  banner_container: {
     paddingLeft: 8,
     paddingRight: 8,
   },

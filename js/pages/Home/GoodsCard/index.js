@@ -23,7 +23,7 @@ export default class GoodsCard extends Component {
           <View style={styles.leftStyle}>
             <Image
               style={styles.leftPic}
-              source={require('./Demo/img/2.jpg')}
+              source={require('../Demo/img/2.jpg')}
               resizeMode='cover'
             />
             <Text style={styles.leftLabel}>精致甜美短外套，小资优雅显魔力</Text>
@@ -36,10 +36,10 @@ export default class GoodsCard extends Component {
             </View>
             <View style={styles.smallPicWrapper}>
               <Image style={styles.smallPic}
-                source={require('./Demo/img/2.jpg')}
+                source={require('../Demo/img/2.jpg')}
                 resizeMode='cover' />
               <Image style={styles.smallPic}
-                source={require('./Demo/img/2.jpg')}
+                source={require('../Demo/img/2.jpg')}
                 resizeMode='cover' />
             </View>
           </View>
@@ -51,10 +51,10 @@ export default class GoodsCard extends Component {
             <Text style={styles.subTitle}>大疆首款运动相机体验</Text>
             <View style={[styles.smallPicWrapper, styles.b_l_picWrapper]}>
               <Image style={styles.smallPic}
-                source={require('./Demo/img/2.jpg')}
+                source={require('../Demo/img/2.jpg')}
                 resizeMode='cover' />
               <Image style={styles.smallPic}
-                source={require('./Demo/img/2.jpg')}
+                source={require('../Demo/img/2.jpg')}
                 resizeMode='cover' />
             </View>
           </View>
@@ -63,14 +63,14 @@ export default class GoodsCard extends Component {
               <Text style={styles.mainTitle}>免息星球</Text>
               <Text style={styles.subTitle}>白条免息购</Text>
               <Image style={[styles.smallPic, styles.b_r_smallPic]}
-                source={require('./Demo/img/2.jpg')}
+                source={require('../Demo/img/2.jpg')}
                 resizeMode='cover' />
             </View>
             <View>
               <Text style={styles.mainTitle}>运动户外</Text>
               <Text style={styles.subTitle}>硬核穿搭</Text>
               <Image style={[styles.smallPic, styles.b_r_smallPic]}
-                source={require('./Demo/img/2.jpg')}
+                source={require('../Demo/img/2.jpg')}
                 resizeMode='cover' />
             </View>
           </View>
@@ -80,7 +80,10 @@ export default class GoodsCard extends Component {
   }
   render() {
     return(
-      <View></View>
+      // {this._renderGoodsCard()}
+      <View>
+        {this._renderGoodsCard()}
+      </View>
     )
   }
 }

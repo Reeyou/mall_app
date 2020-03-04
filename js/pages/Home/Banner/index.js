@@ -1,4 +1,4 @@
-import React, { Component } from './node_modules/react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
@@ -26,11 +26,11 @@ export default class Banner extends Component {
     }, 300)
   }
   onScroll(e) {
-    console.log(e)
+    // console.log(e)
   }
   onMoment(e, state, context) {
     // console.log(e)
-    console.log(state)
+    // console.log(state)
     this.setState({
       activeDotWidth: DOT_WIDTH * (state.index + 1)
     })
@@ -40,7 +40,7 @@ export default class Banner extends Component {
       <View style={styles.container}>
       <Swiper style={styles.wrapper}
         height={150}
-        autoplay={false}
+        autoplay={true}
         onScrollBeginDrag={this.onScroll.bind(this)}
         onMomentumScrollEnd={this.onMoment.bind(this)}
         dot={<View style={{
@@ -65,19 +65,19 @@ export default class Banner extends Component {
         <View style={styles.slide}>
           <Image
             style={styles.image}
-            source={require('../img/2.jpg')}
+            source={require('../Demo/img/2.jpg')}
             resizeMode='cover'
           />
         </View>
         <View style={styles.slide}>
           <Image
             style={styles.image}
-            source={require('../img/3.jpg')}
+            source={require('../Demo/img/3.jpg')}
             resizeMode='cover'
           />
         </View>
         <View style={styles.slide}>
-          <Image style={styles.image} source={require('../img/4.jpg')} />
+          <Image style={styles.image} source={require('../Demo/img/4.jpg')} />
         </View>
       </Swiper>
       </View>

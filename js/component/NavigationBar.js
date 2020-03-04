@@ -48,6 +48,7 @@ export default class NavigationBar extends Component {
       <View style={styles.statusBar}>
         <StatusBar 
           backgroundColor='transparent'
+          // {...this.props.statusBar}
           translucent //设置状态栏是否为透明
           barStyle={'dark-content'}
         />
@@ -60,7 +61,7 @@ export default class NavigationBar extends Component {
     // 导航栏内容
     let navBar = !this.props.hide ?
         <View>
-          <View style={styles.navBar}>
+          <View style={[styles.navBar,this.props.style]}>
             {/* 获取左侧按钮 */}
             {this.getButtonElement(this.props.renderLeftContent)}
             {/* 获取中间区域内容 */}
@@ -74,21 +75,14 @@ export default class NavigationBar extends Component {
 
     return (
         // <LinearGradient
-        // // fa8c35 橙色
-        // // ff8936 橘黄
-        // // ffa400 橙黄
-        // // ffa631 杏黄
-        // // ff7500
-        // // ffab87
-        // // #ff4e47
-        //   start={{ x: 0.56, y: 0 }}
-        //   // locations={[0,1]}
-        //   colors={['#ff4e47', '#ffab87']}
+        // start={{ x : 0, y : 1 }}
+        // end={{ x : 1, y : 1 }}
+        // colors={[ '#FF9100', '#FF6500' ]}
         // >
         //   {statusBar}
         //   {navBar}
         // </LinearGradient>
-        <View>
+        <View style={this.props.style}>
           {statusBar}
           {navBar}
         </View>
@@ -105,11 +99,6 @@ const styles = StyleSheet.create({
     paddingRight: 16,
     paddingLeft: 16,
     height: 50,
-    position: 'relative',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
     elevation: 999, // andriod设置层级
   },
   navContent: {

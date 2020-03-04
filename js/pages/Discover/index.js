@@ -11,6 +11,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import LinearGradient from 'react-native-linear-gradient';
+import FixHeader from '../Home/Demo/fixHeader'
 
 const THEME_COLOR = '#ffa631'
 export default class Discover extends Component {
@@ -68,7 +69,7 @@ export default class Discover extends Component {
     return (
       <View style={styles.container}>
         {navigationBar}
-        <Text>Category</Text>
+        <FixHeader /> 
       </View>
     )
   }

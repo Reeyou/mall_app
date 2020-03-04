@@ -15,14 +15,14 @@ export default class GoodsList extends Component {
       <View style={[styles.base_item,styles.recommend]}>
         <Image
           style={styles.itemPic}
-          source={require('./Demo/tem/item2.png')}
+          source={require('../Demo/item/item2.png')}
           resizeMode='contain'
         />
         <View style={styles.recommend_container}>
           <View style={styles.recommend_item}>
             <Image
               style={styles.recommend_img}
-              source={require('./Demo/img/5.jpg')}
+              source={require('../Demo/img/5.jpg')}
               resizeMode='cover'
             />
             <Text numberOfLines={2} style={styles.name}>【新连接领专属礼】莱蒂卡森 实木床1.8米双人床北欧软包背靠1.5单人床</Text>
@@ -31,7 +31,7 @@ export default class GoodsList extends Component {
           <View style={styles.recommend_item}>
             <Image
               style={styles.recommend_img}
-              source={require('./Demo/img/2.jpg')}
+              source={require('../Demo/img/2.jpg')}
               resizeMode='cover'
             />
             <Text numberOfLines={2} style={styles.name}>【新连接领专属礼】莱蒂卡森 实木床1.8米双人床北欧软包背靠1.5单人床</Text>

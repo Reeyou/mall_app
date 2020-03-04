@@ -37,7 +37,7 @@ export default class Banner extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container,this.props.style]}>
       <Swiper style={styles.wrapper}
         height={150}
         autoplay={true}
@@ -65,19 +65,19 @@ export default class Banner extends Component {
         <View style={styles.slide}>
           <Image
             style={styles.image}
-            source={require('../Demo/img/2.jpg')}
+            source={require('../../pages/Home/Demo/img/2.jpg')}
             resizeMode='cover'
           />
         </View>
         <View style={styles.slide}>
           <Image
             style={styles.image}
-            source={require('../Demo/img/3.jpg')}
+            source={require('../../pages/Home/Demo/img/3.jpg')}
             resizeMode='cover'
           />
         </View>
         <View style={styles.slide}>
-          <Image style={styles.image} source={require('../Demo/img/4.jpg')} />
+          <Image style={styles.image} source={require('../../pages/Home/Demo/img/4.jpg')} />
         </View>
       </Swiper>
       </View>
@@ -87,10 +87,7 @@ export default class Banner extends Component {
 const styles = {
   container: {
     height: 180,
-    position: 'relative',
-    top: -70,
-    left: 0,
-    marginBottom: -70 //解决占位空白
+    elevation: 999
   },
   wrapper: {
     wdith: '100%',

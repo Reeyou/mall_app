@@ -109,14 +109,6 @@ export default class Menu extends Component {
         />
         <Text style={styles.label}>全部</Text>
       </View>
-      <View style={styles.cell}>
-        <Image
-          style={styles.image}
-          source={require('./icons/huiyuan.png')}
-          resizeMode='cover'
-        />
-        <Text style={styles.label}>全部</Text>
-      </View>
     </View>
 
     // })

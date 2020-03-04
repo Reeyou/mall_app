@@ -13,7 +13,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import LinearGradient from 'react-native-linear-gradient';
-import Banner from './Banner'
+import Banner from '../../component/Banner'
 import Menu from './Menu'
 import GoodsList from './GoodsList';
 import GoodsCard from './GoodsCard';
@@ -28,7 +28,7 @@ export default class Home extends Component {
       navBarStyle: {
         backgroundColor: "transparent",
       },
-      statusBarbackgroundColor:  "transparent"
+      statusBarbackgroundColor: "transparent"
     }
   }
   getLeftButton() {
@@ -159,7 +159,12 @@ export default class Home extends Component {
         ref={(component) => { this._scrollView = component }}
       >
         {navigationBar}
-        <Banner />
+        <Banner style={{
+          position: 'relative',
+          top: -70,
+          left: 0,
+          marginBottom: -70
+        }} />
         <Menu />
         {this.getBanner()}
         <GoodsCard />

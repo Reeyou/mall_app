@@ -87,7 +87,7 @@ export default class Banner extends Component {
 const styles = {
   container: {
     height: 180,
-    elevation: 999
+    
   },
   wrapper: {
     wdith: '100%',

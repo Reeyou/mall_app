@@ -4,12 +4,24 @@ import {
   Text,
   View,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions,
+  ART
 } from 'react-native'
 import NavigationBar from '../../component/NavigationBar'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
-const THEME_COLOR = '#ffa631'
+const WIDTH = Dimensions.get('window').width
+const THEME_COLOR = 'white'
+const {
+  Surface, //  一个矩形可渲染的区域，是其他元素的容器
+  Group, // 可容纳多个形状、文本和其他的分组
+  Shape, // 形状定义，可填充
+  Path, // 路径
+  LinearGradient, // 渐变色
+  Pattern, // 填充图片
+  ClippingRectangle, // 剪辑
+} = ART;
 export default class User extends Component {
   constructor(props) {
     super(props)
@@ -30,9 +42,22 @@ export default class User extends Component {
       <AntDesign
         name={'message1'}
         size={26}
-        style={{ color: 'white' }}
+        style={{ color: '#000' }}
       />
     </TouchableOpacity>
+  }
+
+  // 绘制用户信息贝塞尔曲线
+  _renderCurve() {
+    let d_path = Path('M 0 0 h 360 v 183.1 C 300 207 240 219 180 219 S 60 207 0 183.1 V 0 Z M 0 0 h 360 v 183.1 C 300 207 240 219 180 219 S 60 207 0 183.1 V 0 Z M 0 0 h 360 v 183.1 C 300 207 240 219 180 219 S 60 207 0 183.1 V 0 Z');
+    let path = Path().move(0, 0).curve(WIDTH / 2, 80, WIDTH, 0).close()
+
+    return <View style={styles.userInfo}>
+      <View style={{ width: WIDTH, height: 100, backgroundColor: '#fff', marginBottom: -10 }}></View>
+      <Surface width={WIDTH} height={100} style={{ backgroundColor: '#ddd', marginTop: 10 }}>
+        <Shape d={path} fill='#fff' strokeWidth={1} />
+      </Surface>
+    </View>
   }
   render() {
     let statusBar = {
@@ -49,7 +74,7 @@ export default class User extends Component {
     return (
       <View style={styles.container}>
         {navigationBar}
-        <Text>Category</Text>
+        {this._renderART()}
       </View>
     )
   }
@@ -60,7 +85,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    color: 'white',
+    color: '#000',
     fontWeight: 'bold',
     marginRight: 10
   },
@@ -99,5 +124,15 @@ const styles = StyleSheet.create({
   },
   indicatorContainer: {
     alignItems: 'center'
+  },
+
+  //==================//
+  userInfo: {
+    width: WIDTH,
+    position: 'relative',
+    top: -70,
+    left: 0,
+    marginBottom: -70,
+    elevation: -1
   }
 })

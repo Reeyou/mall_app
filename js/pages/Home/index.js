@@ -163,7 +163,7 @@ export default class Home extends Component {
           position: 'relative',
           top: -70,
           left: 0,
-          marginBottom: -70
+          marginBottom: -70,
         }} />
         <Menu />
         {this.getBanner()}

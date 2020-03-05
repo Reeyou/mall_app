@@ -6,12 +6,15 @@ import {
   Image,
   Button,
   TextInput,
+  Dimensions,
   TouchableOpacity
 } from 'react-native'
 import NavigationBar from '../../component/NavigationBar'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import CheckBox from 'react-native-check-box'
 
+import { BoxShadow } from 'react-native-shadow'
+const SHADOW_WIDTH = Dimensions.get('window').width - 40
 const THEME_COLOR = 'white'
 export default class ShopCart extends Component {
   constructor(props) {
@@ -57,8 +60,8 @@ export default class ShopCart extends Component {
           <Text style={styles.emptyCartTip}>购物车是空的</Text>
         </View>
         <View style={styles.emptyCartHandle}>
-          <Text style={[styles.btn,styles.btnLeft]}>随便逛逛</Text>
-          <Text style={[styles.btn,styles.btnRight]}>查看关注</Text>
+          <Text style={[styles.btn, styles.btnLeft]}>随便逛逛</Text>
+          <Text style={[styles.btn, styles.btnRight]}>查看关注</Text>
         </View>
       </View>
     )
@@ -76,6 +79,7 @@ export default class ShopCart extends Component {
             }}
             isChecked={this.state.isChecked}
           />
+          
           <View style={styles.goods_container}>
             <Image
               style={styles.goods_img}
@@ -96,6 +100,28 @@ export default class ShopCart extends Component {
             </View>
           </View>
         </View>
+      </View>
+    )
+  }
+  _renderCartFooter() {
+    return (
+      <View style={styles.cart_footer}>
+        <View style={styles.footer_left}>
+        <CheckBox
+            style={styles.checkBox}
+            onClick={() => {
+              this.setState({
+                isChecked: !this.state.isChecked
+              })
+            }}
+            isChecked={this.state.isChecked}
+          />
+          <Text style={styles.total_label}>全选</Text>
+        </View>
+          <View style={styles.footer_right}>
+            <Text style={styles.price_label}>总计：<Text style={styles.total_price}>￥16997</Text></Text>
+            <Text style={styles.jiesuan}>结算 (3)</Text>
+          </View>
       </View>
     )
   }
@@ -121,6 +147,7 @@ export default class ShopCart extends Component {
         {/* {this._renderEmptyCart()} */}
         {this._renderCartItem()}
         {this._renderCartItem()}
+        {this._renderCartFooter()}
       </View>
     )
   }
@@ -128,7 +155,7 @@ export default class ShopCart extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white"
+    backgroundColor: "#f5f5f5",
   },
   title: {
     fontSize: 18,
@@ -175,17 +202,19 @@ const styles = StyleSheet.create({
 
   //==================//
   cartItemContainer: {
-
+    height: 100,
+    marginTop: 10,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    marginLeft: 10,
+    marginRight: 10,
   },
   cartItemContent: {
     flex: 1,
     flexDirection: 'row',
+    alignItems: 'center',
   },
   checkBox: {
-    position: "relative",
-    top: 40,
-    left: 0,
-    marginTop: -12,
     width: 40,
     padding: 10,
     alignItems: 'center',
@@ -194,7 +223,7 @@ const styles = StyleSheet.create({
   goods_container: {
     flex: 1,
     flexDirection: 'row',
-    
+
   },
   goods_img: {
     width: 80,
@@ -321,5 +350,52 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     borderColor: 'red',
     color: 'red'
+  },
+
+  // cartfooter //
+  cart_footer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: '100%',
+    height: 50,
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  footer_left: {
+    flexDirection: 'row',
+    // justifyContent: 'space-between'    
+    alignItems: 'center'
+  },
+  footer_right: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  total_price: {
+    color: '#ca141d',
+    fontSize: 16,
+    fontWeight: 'bold'
+  },
+  total_label: {
+    color: "#999",
+    fontSize: 12
+  },
+  price_label: {
+    color: '#333',
+    fontSize: 14
+  },
+  jiesuan: {
+    borderRadius: 20,
+    backgroundColor: '#e43e2d',
+    marginLeft: 10,
+    color: 'white',
+    paddingTop: 6,
+    paddingBottom: 6,
+    paddingLeft: 12,
+    paddingRight: 12
   }
 })

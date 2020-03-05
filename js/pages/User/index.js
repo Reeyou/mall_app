@@ -5,11 +5,16 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Image,
   Dimensions,
+  ScrollView,
   ART
 } from 'react-native'
 import NavigationBar from '../../component/NavigationBar'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import Menu from '../Home/Menu'
+import RecommendGoods from '../../component/RecommendGood'
 
 const WIDTH = Dimensions.get('window').width
 const THEME_COLOR = 'white'
@@ -42,7 +47,7 @@ export default class User extends Component {
       <AntDesign
         name={'message1'}
         size={26}
-        style={{ color: '#000' }}
+        style={{ color: '#fff' }}
       />
     </TouchableOpacity>
   }
@@ -50,42 +55,111 @@ export default class User extends Component {
   // 绘制用户信息贝塞尔曲线
   _renderCurve() {
     let d_path = Path('M 0 0 h 360 v 183.1 C 300 207 240 219 180 219 S 60 207 0 183.1 V 0 Z M 0 0 h 360 v 183.1 C 300 207 240 219 180 219 S 60 207 0 183.1 V 0 Z M 0 0 h 360 v 183.1 C 300 207 240 219 180 219 S 60 207 0 183.1 V 0 Z');
-    let path = Path().move(0, 0).curve(WIDTH / 2, 80, WIDTH, 0).close()
+    let path = Path().move(0, 0).curve(WIDTH / 2, 40, WIDTH, 0).close()
 
     return <View style={styles.userInfo}>
-      <View style={{ width: WIDTH, height: 100, backgroundColor: '#fff', marginBottom: -10 }}></View>
-      <Surface width={WIDTH} height={100} style={{ backgroundColor: '#ddd', marginTop: 10 }}>
-        <Shape d={path} fill='#fff' strokeWidth={1} />
+      <View style={{ width: WIDTH, height: 150, backgroundColor: '#ccc', marginBottom: -10 }}>
+        <View style={styles.user_content}>
+          <Image
+            style={styles.avatar}
+            source={require('../Home/Demo/img/2.jpg')}
+            resizeMode='cover'
+          />
+          <TouchableOpacity>
+            <View style={styles.login_content}>
+              <Text style={styles.login_text}>登录/注册</Text>
+              <AntDesign
+                name={'right'}
+                size={22}
+                style={{ color: '#fff' }}
+              />
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <Surface width={WIDTH} height={20} style={{ backgroundColor: '#f5f5f5', marginTop: 10 }}>
+        <Shape d={path} fill='#ccc' strokeWidth={1} />
       </Surface>
     </View>
   }
+
+  // 订单
+  renderOrderTab() {
+    const orderArray = [
+      { Icon: 'MaterialIcons', icons: 'payment', label: '待付款' },
+      { Icon: 'MaterialIcons', icons: 'payment', label: '待收货' },
+      { Icon: 'MaterialIcons', icons: 'payment', label: '待评价' },
+      { Icon: 'MaterialIcons', icons: 'payment', label: '退换/售后' },
+      { Icon: 'MaterialIcons', icons: 'payment', label: '我的订单' }
+    ]
+    return (
+      <View style={styles.order_container}>
+        {
+          orderArray.map((item, index) => (
+            <View style={styles.order_item}>
+              <MaterialIcons
+                name={item.icons}
+                size={24}
+                style={{ color: '#666' }}
+              />
+              <Text style={styles.order_label}>{item.label}</Text>
+            </View>
+          ))
+        }
+      </View>
+    )
+  }
+
+  //tools工具栏
+  // renderToolTab() {
+  //   return (
+  //     <View style={styles.container}>
+  //       <View style={styles.cell}>
+  //         <Image
+  //           style={styles.image}
+  //           source={require('./icons/huiyuan.png')}
+  //           resizeMode='cover'
+  //         />
+  //         <Text style={styles.label}>全部</Text>
+  //       </View>
+  //     </View>
+  //   )
+  // }
   render() {
     let statusBar = {
-      backgroundColor: THEME_COLOR,
-      barStyle: 'light-content',
+      // backgroundColor: 'transparent',
+      // barStyle: 'light-content',
       // hidden: true
     }
     let navigationBar = <NavigationBar
       statusBar={statusBar}
       renderLeftContent={this.getLeftContent()}
       renderRightButton={this.getRightButton()}
-      style={{ backgroundColor: THEME_COLOR }}
+      style={{ backgroundColor: 'transparent' }}
     />
     return (
-      <View style={styles.container}>
-        {navigationBar}
-        {this._renderART()}
-      </View>
+        <ScrollView style={styles.container}
+          showsVerticalScrollIndicator={false}
+        >
+          {navigationBar}
+          {this._renderCurve()}
+          {this.renderOrderTab()}
+          <View style={styles.tool_container}>
+            <Menu />
+          </View>
+          <RecommendGoods />
+        </ScrollView>
     )
   }
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    // flex: 1,
+    backgroundColor: "#f5f5f5",
   },
   title: {
     fontSize: 18,
-    color: '#000',
+    color: '#fff',
     fontWeight: 'bold',
     marginRight: 10
   },
@@ -104,13 +178,12 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 24,
     fontWeight: "bold"
-
   },
   barStyle: {
     height: 50,
     paddingRight: 10,
     paddingLeft: 10,
-    backgroundColor: THEME_COLOR
+    backgroundColor: 'transparent'
   },
   labelStyle: {
     fontSize: 13,
@@ -133,6 +206,59 @@ const styles = StyleSheet.create({
     top: -70,
     left: 0,
     marginBottom: -70,
-    elevation: -1
+    elevation: -1,
+  },
+  user_content: {
+    marginTop: 60,
+    marginLeft: 20,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    // height: 200,
+    backgroundColor: '#ccc'
+  },
+  avatar: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+  },
+  login_content: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  login_text: {
+    color: 'white',
+    marginLeft: 20,
+    fontSize: 18
+  },
+
+  // order //
+  order_container: {
+    height: 72,
+    marginTop: 12,
+    marginLeft: 10,
+    marginRight: 10,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  order_item: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  order_label: {
+    fontSize: 12,
+    marginTop: 6,
+    color: '#666'
+  },
+
+  // tool
+  tool_container: {
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    borderRadius: 10,
   }
 })

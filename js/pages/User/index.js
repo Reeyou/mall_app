@@ -3,7 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
+  StatusBar,
   TouchableOpacity,
   Image,
   Dimensions,
@@ -17,6 +17,8 @@ import Menu from '../Home/Menu'
 import RecommendGoods from '../../component/RecommendGood'
 import Resolution from "../../utils/Px2dp"
 
+const ANDROID_STATUBAR_HEIGHT = StatusBar.currentHeight
+const offsetTopHeight = -50-ANDROID_STATUBAR_HEIGHT
 const WIDTH = Dimensions.get('window').width
 const THEME_COLOR = 'white'
 const {
@@ -58,7 +60,7 @@ export default class User extends Component {
     >
       <AntDesign
         name={'message1'}
-        size={26}
+        size={22}
         style={{ color: '#fff' }}
       />
     </TouchableOpacity>
@@ -156,24 +158,6 @@ export default class User extends Component {
   }
 }
 const styles = StyleSheet.create({
-  re_container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    // backgroundColor: '#ff0000',
-  },
-  welcome: {
-    fontSize: 40,
-    textAlign: 'center',
-    margin: 10,
-    backgroundColor: "transparent"
-  },
-  instructions: {
-    backgroundColor: "transparent",
-    textAlign: 'center',
-    color: 0xffff,
-    marginBottom: 5,
-  },
   container: {
     // flex: 1,
     backgroundColor: "#f5f5f5",
@@ -224,9 +208,9 @@ const styles = StyleSheet.create({
   userInfo: {
     width: WIDTH,
     position: 'relative',
-    top: -70,
+    top: offsetTopHeight,
     left: 0,
-    marginBottom: -70,
+    marginBottom: offsetTopHeight,
     elevation: -1,
   },
   user_content: {

@@ -29,7 +29,7 @@ export default class GoodsCard extends BaseCard {
           resizeMode='contain'
         />
         <View style={styles.topContainer}>
-          {this.doubleCell({marginRight: 4})}
+          {this.doubleCell({ marginRight: 2 })}
           {this.doubleCell()}
         </View>
       </View>
@@ -46,13 +46,13 @@ export default class GoodsCard extends BaseCard {
           resizeMode='contain'
         />
         <View style={styles.topContainer}>
-          {this.backgroundSingleCell({marginRight: 4})}
+          {this.backgroundSingleCell({ marginRight: 2 })}
           {this.backgroundDoubleCell()}
         </View>
         <View style={styles.bottomContainer}>
-          {this.singleCell({marginRight: 4})}
-          {this.singleCell({marginRight: 4})}
-          {this.singleCell({marginRight: 4})}
+          {this.singleCell({ marginRight: 2 })}
+          {this.singleCell({ marginRight: 2 })}
+          {this.singleCell({ marginRight: 2 })}
           {this.singleCell()}
         </View>
       </View>
@@ -68,12 +68,13 @@ export default class GoodsCard extends BaseCard {
           resizeMode='contain'
         />
         <View style={styles.topContainer}>
-          {this.backgroundSingleCell({marginRight: 4})}
+          {this.backgroundSingleCell({ marginRight: 2 })}
           {this.backgroundDoubleCell()}
         </View>
         <View style={styles.bottomContainer}>
-          {this.doubleCell({marginRight: 4})}
-          {this.singleCell({marginRight: 4})}
+          {this.singleCell({ marginRight: 2 })}
+          {this.singleCell({ marginRight: 2 })}
+          {this.singleCell({ marginRight: 2 })}
           {this.singleCell()}
         </View>
       </View>
@@ -90,17 +91,17 @@ export default class GoodsCard extends BaseCard {
           resizeMode='contain'
         />
         <View style={styles.topContainer}>
-          {this.backgroundSingleCell({marginRight: 4})}
+          {this.backgroundSingleCell({ marginRight: 2 })}
           {this.backgroundDoubleCell()}
         </View>
         <View style={styles.bottomContainer}>
-          {this.doubleCell({marginRight: 4, borderBottomLeftRadius: 0, borderBottomRightRadius: 0})}
-          {this.doubleCell({borderBottomLeftRadius: 0, borderBottomRightRadius: 0})}
+          {this.doubleCell({ marginRight: 2, borderBottomLeftRadius: 0, borderBottomRightRadius: 0 })}
+          {this.doubleCell({ borderBottomLeftRadius: 0, borderBottomRightRadius: 0 })}
         </View>
         <View style={styles.bottomContainer}>
-          {this.singleCell({marginRight: 4})}
-          {this.singleCell({marginRight: 4})}
-          {this.singleCell({marginRight: 4})}
+          {this.singleCell({ marginRight: 2 })}
+          {this.singleCell({ marginRight: 2 })}
+          {this.singleCell({ marginRight: 2 })}
           {this.singleCell()}
         </View>
       </View>
@@ -117,11 +118,11 @@ export default class GoodsCard extends BaseCard {
           resizeMode='contain'
         />
         <View style={styles.topContainer}>
-          {this.backgroundSingleCell({marginRight: 4})}
+          {this.backgroundSingleCell({ marginRight: 2 })}
           {this.backgroundDoubleCell()}
         </View>
         <View style={styles.bottomContainer}>
-          {this.doubleCell({marginRight: 4})}
+          {this.doubleCell({ marginRight: 2 })}
           {this.doubleCell()}
         </View>
       </View>

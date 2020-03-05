@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   recommend_item: {
-    width: '49.5%',
+    width: '49%',
     backgroundColor: 'white',
     borderRadius: 10
   },

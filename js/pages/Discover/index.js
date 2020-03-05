@@ -50,7 +50,7 @@ export default class Discover extends Component {
     >
       <AntDesign
         name={'message1'}
-        size={26}
+        size={22}
         style={{ color: '#000' }}
       />
     </TouchableOpacity>
@@ -74,7 +74,7 @@ export default class Discover extends Component {
             resizeMode='cover'
           />
           <View style={styles.item_detail}>
-            <Text style={styles.title}>【互动赢好礼】女神节，活出最美的姿态</Text>
+            <Text style={styles.item_title}>【互动赢好礼】女神节，活出最美的姿态</Text>
             <Text style={styles.sub_title}>参与互动话题赢取华为商城联合全棉时代守护女神礼盒</Text>
             <View style={styles.item_footer}>
               <Text style={styles.time}>2019-02-29</Text>
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10
   },
-  title: {
+  item_title: {
     fontSize: 16,
     marginTop: 8,
   },

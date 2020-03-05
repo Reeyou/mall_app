@@ -39,7 +39,7 @@ export default class ShopCart extends Component {
     >
       <AntDesign
         name={'message1'}
-        size={26}
+        size={22}
         style={{ color: '#000' }}
       />
     </TouchableOpacity>

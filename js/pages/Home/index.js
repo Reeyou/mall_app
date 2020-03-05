@@ -6,7 +6,8 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
-  Image
+  Image,
+  StatusBar
 } from 'react-native'
 import NavigationBar from '../../component/NavigationBar'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -19,6 +20,8 @@ import GoodsList from './GoodsList';
 import GoodsCard from './GoodsCard';
 import { Px2dp } from '../../utils/Px2dp'
 
+const ANDROID_STATUBAR_HEIGHT = StatusBar.currentHeight
+const offsetTopHeight = -50-ANDROID_STATUBAR_HEIGHT
 const THEME_COLOR = '#678'
 const LOCATION = '上海市'
 const TABS = ['推荐', '手机专区', '服饰专区', '母婴专区', '电脑专区', '拼团专区']
@@ -220,9 +223,9 @@ export default class Home extends Component {
           bannerList={this.state.bannerList}
           style={{
             position: 'relative',
-            top: -70,
+            top: offsetTopHeight,
             left: 0,
-            marginBottom: -70,
+            marginBottom: offsetTopHeight,
           }}
         />
         <Menu MenuList={this.menuList} cellStyle={{width: '20%'}}/>

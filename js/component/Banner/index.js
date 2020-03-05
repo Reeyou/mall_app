@@ -4,10 +4,12 @@ import {
   Text,
   View,
   Image,
-  Dimensions
+  Dimensions,
+  StatusBar
 } from 'react-native';
 import Swiper from 'react-native-swiper';
 
+const ANDROID_STATUBAR_HEIGHT = StatusBar.currentHeight
 const { width } = Dimensions.get('window');
 const DOT_WIDTH = 8
 export default class Banner extends Component {
@@ -82,7 +84,6 @@ export default class Banner extends Component {
 const styles = {
   container: {
     height: 180,
-
   },
   wrapper: {
     wdith: '100%',

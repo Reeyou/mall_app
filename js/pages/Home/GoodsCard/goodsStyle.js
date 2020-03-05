@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
   },
   itemPic: {
     width: '100%',
-    height: 50,
+    height: 40,
   },
   topContainer: {
     flexDirection: 'row',
@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
   },
   b_singlePic: {
     width: '100%',
-    height: 130,
+    height: 110,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
   },
@@ -120,7 +120,7 @@ export const styles = StyleSheet.create({
   },
   subTitle: {
     fontSize: 10,
-    color: '#aaa',
+    color: '#666',
     paddingLeft: 10,
   },
   b_r_smallPic: {

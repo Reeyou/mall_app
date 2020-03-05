@@ -11,6 +11,8 @@ import {
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient';
 
+const ANDROID_STATUBAR_HEIGHT = StatusBar.currentHeight
+// const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBarManager.HEIGHT
 export default class NavigationBar extends Component {
   constructor(props) {
     super(props)
@@ -114,6 +116,6 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   statusBar: {
-    height: 20
+    height: ANDROID_STATUBAR_HEIGHT
   }
 })

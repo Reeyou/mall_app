@@ -15,7 +15,7 @@ export default class GoodsList extends Component {
       <View style={[styles.base_item,styles.recommend]}>
         <Image
           style={styles.itemPic}
-          source={require('../Demo/item/item2.png')}
+          source={require('../Demo/item/recommend.png')}
           resizeMode='contain'
         />
         <View style={styles.recommend_container}>

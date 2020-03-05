@@ -20,7 +20,20 @@ import Menu from '../Home/Menu'
 const THEME_COLOR = 'white'
 export default class Discover extends Component {
   constructor(props) {
-    super(props)
+    super(props),
+    this.bannerList = [
+      {bannerImg: require('../Home/Demo/img/1.jpg')},
+      {bannerImg: require('../Home/Demo/img/2.jpg')},
+      {bannerImg: require('../Home/Demo/img/3.jpg')},
+      {bannerImg: require('../Home/Demo/img/4.jpg')},
+      {bannerImg: require('../Home/Demo/img/5.jpg')}
+    ],
+    this.menuList = [
+      {label: '商城公告', menuIcon: require("../Home/Menu/icons/chaoshi.png")},
+      {label: '图片专区', menuIcon: require('../Home/Menu/icons/shuma.png')},
+      {label: '视频专区', menuIcon: require('../Home/Menu/icons/lvxing.png')},
+      {label: '商城资讯', menuIcon: require('../Home/Menu/icons/zhuanqian.png')}
+    ]
   }
   getLeftContent() {
     return <TouchableOpacity
@@ -87,8 +100,8 @@ export default class Discover extends Component {
       <View style={styles.container}>
         {navigationBar}
         <ScrollView style={styles.discover_banner}>
-          <Banner />
-          <Menu />
+          <Banner bannerList={this.bannerList} />
+          <Menu MenuList={this.menuList} cellStyle={{width:'25%'}}/>
           {this._renderContent()}
           {this._renderItem()}
           {this._renderItem()}

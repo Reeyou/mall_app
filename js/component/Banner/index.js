@@ -6,8 +6,8 @@ import {
   Image,
   Dimensions
 } from 'react-native';
-
 import Swiper from 'react-native-swiper';
+
 const { width } = Dimensions.get('window');
 const DOT_WIDTH = 8
 export default class Banner extends Component {
@@ -36,50 +36,45 @@ export default class Banner extends Component {
     })
   }
   render() {
+    const {style,bannerList} = this.props
     return (
-      <View style={[styles.container,this.props.style]}>
-      <Swiper style={styles.wrapper}
-        height={150}
-        autoplay={true}
-        onScrollBeginDrag={this.onScroll.bind(this)}
-        onMomentumScrollEnd={this.onMoment.bind(this)}
-        dot={<View style={{
-          backgroundColor: 'white',
-          width: 8,
-          height: 4,
-          borderRadius: 8,
-          marginLeft: 2,
-          marginRight: 2
-        }} />}
-        activeDot={<View style={{
-          backgroundColor: 'white',
-          width: 14,
-          height: 4,
-          borderRadius: 8,
-          marginLeft: 2,
-          marginRight: 2
-        }} />}
-        paginationStyle={{
-          bottom: 10,
-        }}>
-        <View style={styles.slide}>
-          <Image
-            style={styles.image}
-            source={require('../../pages/Home/Demo/img/2.jpg')}
-            resizeMode='cover'
-          />
-        </View>
-        <View style={styles.slide}>
-          <Image
-            style={styles.image}
-            source={require('../../pages/Home/Demo/img/3.jpg')}
-            resizeMode='cover'
-          />
-        </View>
-        <View style={styles.slide}>
-          <Image style={styles.image} source={require('../../pages/Home/Demo/img/4.jpg')} />
-        </View>
-      </Swiper>
+      <View style={[styles.container, style]}>
+        <Swiper style={styles.wrapper}
+          height={150}
+          autoplay={true}
+          onScrollBeginDrag={this.onScroll.bind(this)}
+          onMomentumScrollEnd={this.onMoment.bind(this)}
+          dot={<View style={{
+            backgroundColor: 'white',
+            width: 8,
+            height: 4,
+            borderRadius: 8,
+            marginLeft: 2,
+            marginRight: 2
+          }} />}
+          activeDot={<View style={{
+            backgroundColor: 'white',
+            width: 14,
+            height: 4,
+            borderRadius: 8,
+            marginLeft: 2,
+            marginRight: 2
+          }} />}
+          paginationStyle={{
+            bottom: 10,
+          }}>
+          {
+            bannerList.map((item, index) => (
+              <View style={styles.slide}>
+                <Image
+                  style={styles.image}
+                  source={item.bannerImg}
+                  resizeMode='cover'
+                />
+              </View>
+            ))
+          }
+        </Swiper>
       </View>
     )
   }
@@ -87,7 +82,7 @@ export default class Banner extends Component {
 const styles = {
   container: {
     height: 180,
-    
+
   },
   wrapper: {
     wdith: '100%',

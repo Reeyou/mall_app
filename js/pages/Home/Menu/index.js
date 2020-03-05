@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import {
   StyleSheet,
+  ViewPropTypes,
   Text,
   View,
   Image,
@@ -17,140 +19,60 @@ export default class Menu extends Component {
       swiperShow: false,
       activeDotWidth: 14
     }
-    this.init()
   }
-  init() {
-    this.state = {
-      menus: [
-        {
-          label: '超市',
-          img: "./icons/chaoshi.png"
-        },
-        {
-          label: '国际',
-          img: "./icons/guoji.png"
-        },
-        {
-          label: '手机数码',
-          img: "./icons/chaoshi.png"
-        },
-        {
-          label: '电脑办公',
-          img: "./icons/diannao.png"
-        },
-        {
-          label: '酒水饮料',
-          img: "./icons/chaoshi.png"
-        },
-        {
-          label: '服饰',
-          img: "./icons/fushi.png"
-        },
-        {
-          label: '美妆馆',
-          img: "./icons/meizhuan.png"
-        },
-        {
-          label: '个护清洁',
-          img: "./icons/qingjie.png"
-        },
-        {
-          label: '会员',
-          img: "./icons/huiyuan.png"
-        },
-        {
-          label: '全部',
-          img: "./icons/quanbu.png"
-        },
-      ]
-    }
+  static propTypes = {
+    cellStyle: ViewPropTypes.style,
+    MenuList: PropTypes.array,
   }
-  _renderItem() {
-    console.log(this.state.menus)
-    // this.state.menus.map((item, index) => {
+  _renderItem(data) {    
     return <View style={styles.container}>
-      <View style={styles.cell}>
-        <Image
-          style={styles.image}
-          source={require('./icons/huiyuan.png')}
-          resizeMode='cover'
-        />
-        <Text style={styles.label}>全部</Text>
-      </View>
-      <View style={styles.cell}>
-        <Image
-          style={styles.image}
-          source={require('./icons/huiyuan.png')}
-          resizeMode='cover'
-        />
-        <Text style={styles.label}>全部</Text>
-      </View>
-      <View style={styles.cell}>
-        <Image
-          style={styles.image}
-          source={require('./icons/huiyuan.png')}
-          resizeMode='cover'
-        />
-        <Text style={styles.label}>全部</Text>
-      </View>
-      <View style={styles.cell}>
-        <Image
-          style={styles.image}
-          source={require('./icons/huiyuan.png')}
-          resizeMode='cover'
-        />
-        <Text style={styles.label}>全部</Text>
-      </View>
-      <View style={styles.cell}>
-        <Image
-          style={styles.image}
-          source={require('./icons/huiyuan.png')}
-          resizeMode='cover'
-        />
-        <Text style={styles.label}>全部</Text>
-      </View>
+      {
+        data.map((item, index) => (
+          <View style={[styles.cell,this.props.cellStyle]}>
+            <Image
+              style={styles.image}
+              source={item.menuIcon}
+              resizeMode='cover'
+            />
+            <Text style={styles.label}>{item.label}</Text>
+          </View>
+        
+    
+        ))
+      }
     </View>
-
-    // })
   }
   render() {
+    console.log(this.props.cellStyle.width)
     return (
-      <View style={styles.menu_container}>
-        {this._renderItem()}
+      <View>
+        {this._renderItem(this.props.MenuList)}
       </View>
     )
   }
 }
 const styles = {
-  menu_container: {
-    // flex: 1,
-    // position: 'relative',
-    // top: -40,
-    // height: 400,
-    // flexDirection: 'column',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-  },
   container: {
     flexDirection: 'row',
     alignItems: 'center',
     flexWrap: 'wrap',
     backgroundColor: 'white',
-    paddingTop: 16
+    pazddingBottom: 10
   },
   cell: {
-    width: '20%',
-    height: 90,
+    // width: '20%',
+    // width: this.props.cellStyle.width,
     flexDirection: 'column',
     alignItems: 'center',
   },
   label: {
     marginTop: 5,
     fontSize: 12,
-    // textAlign: 'center'
+    color: '#666'
   },
   image: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
+    marginTop: 12,
   }
 }

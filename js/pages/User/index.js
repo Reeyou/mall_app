@@ -15,6 +15,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Menu from '../Home/Menu'
 import RecommendGoods from '../../component/RecommendGood'
+import Resolution from "../../utils/Px2dp"
 
 const WIDTH = Dimensions.get('window').width
 const THEME_COLOR = 'white'
@@ -31,12 +32,12 @@ export default class User extends Component {
   constructor(props) {
     super(props)
     this.menuList = [
-      {label: '商城公告', menuIcon: require("../Home/Menu/icons/chaoshi.png")},
-      {label: '图片专区', menuIcon: require('../Home/Menu/icons/shuma.png')},
-      {label: '视频专区', menuIcon: require('../Home/Menu/icons/lvxing.png')},
-      {label: '商城资讯', menuIcon: require('../Home/Menu/icons/zhuanqian.png')},
-      {label: '视频专区', menuIcon: require('../Home/Menu/icons/lvxing.png')},
-      {label: '商城资讯', menuIcon: require('../Home/Menu/icons/zhuanqian.png')}
+      { label: '商城公告', menuIcon: require("../Home/Menu/icons/chaoshi.png") },
+      { label: '图片专区', menuIcon: require('../Home/Menu/icons/shuma.png') },
+      { label: '视频专区', menuIcon: require('../Home/Menu/icons/lvxing.png') },
+      { label: '商城资讯', menuIcon: require('../Home/Menu/icons/zhuanqian.png') },
+      { label: '视频专区', menuIcon: require('../Home/Menu/icons/lvxing.png') },
+      { label: '商城资讯', menuIcon: require('../Home/Menu/icons/zhuanqian.png') }
     ]
   }
   componentWillMount() {
@@ -67,10 +68,10 @@ export default class User extends Component {
   _renderCurve() {
     let d_path = Path('M 0 0 h 360 v 183.1 C 300 207 240 219 180 219 S 60 207 0 183.1 V 0 Z M 0 0 h 360 v 183.1 C 300 207 240 219 180 219 S 60 207 0 183.1 V 0 Z M 0 0 h 360 v 183.1 C 300 207 240 219 180 219 S 60 207 0 183.1 V 0 Z');
     let path = Path().move(0, 0).curve(WIDTH / 2, 40, WIDTH, 0).close()
-    
+
     return <Surface width={WIDTH} height={20} style={{ backgroundColor: '#f5f5f5', marginTop: 10 }}>
-        <Shape d={path} fill='#ccc' strokeWidth={1} />
-      </Surface>
+      <Shape d={path} fill='#ccc' strokeWidth={1} />
+    </Surface>
   }
 
   _renderUserInfo() {
@@ -125,22 +126,9 @@ export default class User extends Component {
     )
   }
 
-  //tools工具栏
-  // renderToolTab() {
-  //   return (
-  //     <View style={styles.container}>
-  //       <View style={styles.cell}>
-  //         <Image
-  //           style={styles.image}
-  //           source={require('./icons/huiyuan.png')}
-  //           resizeMode='cover'
-  //         />
-  //         <Text style={styles.label}>全部</Text>
-  //       </View>
-  //     </View>
-  //   )
-  // }
   render() {
+   
+
     let statusBar = {
       // backgroundColor: 'transparent',
       // barStyle: 'light-content',
@@ -153,21 +141,39 @@ export default class User extends Component {
       style={{ backgroundColor: 'transparent' }}
     />
     return (
-        <ScrollView style={styles.container}
-          showsVerticalScrollIndicator={false}
-        >
-          {navigationBar}
-          {this._renderUserInfo()}
-          {this.renderOrderTab()}
-          <View style={styles.tool_container}>
-            <Menu MenuList={this.menuList} cellStyle={{width: '20%'}}/>
-          </View>
-          <RecommendGoods />
-        </ScrollView>
+      <ScrollView style={styles.container}
+        showsVerticalScrollIndicator={false}
+      >
+        {navigationBar}
+        {this._renderUserInfo()}
+        {this.renderOrderTab()}
+        <View style={styles.tool_container}>
+          <Menu MenuList={this.menuList} cellStyle={{ width: '20%' }} />
+        </View>
+        <RecommendGoods />
+      </ScrollView>
     )
   }
 }
 const styles = StyleSheet.create({
+  re_container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: '#ff0000',
+  },
+  welcome: {
+    fontSize: 40,
+    textAlign: 'center',
+    margin: 10,
+    backgroundColor: "transparent"
+  },
+  instructions: {
+    backgroundColor: "transparent",
+    textAlign: 'center',
+    color: 0xffff,
+    marginBottom: 5,
+  },
   container: {
     // flex: 1,
     backgroundColor: "#f5f5f5",

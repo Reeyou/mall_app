@@ -17,6 +17,7 @@ import Banner from '../../component/Banner'
 import Menu from './Menu'
 import GoodsList from './GoodsList';
 import GoodsCard from './GoodsCard';
+import { Px2dp } from '../../utils/Px2dp'
 
 const THEME_COLOR = '#678'
 const LOCATION = '上海市'
@@ -181,14 +182,14 @@ export default class Home extends Component {
       })
     }
   }
-  onStop = (e) => {
-    let { x, y } = e.nativeEvent.contentOffset;
-    if (y < px2dp(50)) {
-      this._scrollView.scrollTo({ x: 0, y: 0, animated: true })
-    } else if (y < px2dp(100)) {
-      this._scrollView.scrollTo({ x: 0, y: px2dp(100), animated: true })
-    }
-  }
+  // onStop = (e) => {
+  //   let { x, y } = e.nativeEvent.contentOffset;
+  //   if (y < px2dp(50)) {
+  //     this._scrollView.scrollTo({ x: 0, y: 0, animated: true })
+  //   } else if (y < px2dp(100)) {
+  //     this._scrollView.scrollTo({ x: 0, y: px2dp(100), animated: true })
+  //   }
+  // }
 
   render() {
     let statusBar = {
@@ -237,12 +238,6 @@ export default class Home extends Component {
   }
 }
 const styles = StyleSheet.create({
-  linearGradient: {
-    // flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderRadius: 5
-  },
   buttonText: {
     fontSize: 18,
     fontFamily: 'Gill Sans',
@@ -320,7 +315,6 @@ const styles = StyleSheet.create({
     paddingRight: 8,
     backgroundColor: '#fff',
     paddingBottom: 10,
-    paddingTop: 10
   },
   banner: {
     width: '100%',

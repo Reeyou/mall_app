@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native'
+import { Px2dp } from '../../../utils/Px2dp'
 
 export const styles = StyleSheet.create({
   // baseitem
@@ -65,16 +66,23 @@ export const styles = StyleSheet.create({
   },
   smallPicWrapper: {
     flexDirection: 'row',
+    justifyContent: 'center',
     marginTop: 8,
     paddingLeft: 10,
     paddingRight: 10
   },
   smallPic: {
-    width: 80,
-    height: 80,
+    width: Px2dp(120),
+    height: Px2dp(120),
     marginLeft: 5,
     marginRight: 5,
     borderRadius: 6
+  },
+  d_c_smallPic: {
+    marginRight: 10
+  },
+  b_d_smallPic: {
+    paddingTop: 10,
   },
   bottomContainer: {
     flexDirection: 'row',
@@ -84,7 +92,15 @@ export const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderBottomLeftRadius: 4,
     borderBottomRightRadius: 4,
-    flex: 1
+    flex: 1,
+    paddingBottom: 10
+    // flexDirection: 'row',
+    // alignItems: 'center'
+  },
+  img_wrapper: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
   doubleCell: {
     flex: 2,

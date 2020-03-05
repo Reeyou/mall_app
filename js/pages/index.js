@@ -2,18 +2,14 @@ import React, { Component } from 'react'
 import {
   StyleSheet
 } from 'react-native'
-import { TabNavigator } from '../navigators/TabNavigator'
+import TabNavigator from '../navigators/TabNavigator'
 
 
 export default class Index extends Component {
-  renderTabs() {
-    return TabNavigator
-  }
 
   render() {
-    const Tabs = this.renderTabs()
     return (
-      <Tabs />
+      <TabNavigator />
     )
   }
 }

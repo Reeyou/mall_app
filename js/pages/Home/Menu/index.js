@@ -57,7 +57,7 @@ const styles = {
     alignItems: 'center',
     flexWrap: 'wrap',
     backgroundColor: 'white',
-    pazddingBottom: 10
+    paddingBottom: 10
   },
   cell: {
     // width: '20%',

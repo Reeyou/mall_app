@@ -1,15 +1,10 @@
-'use strict';
+'use strict'
 
-import { Dimensions } from 'react-native'
+import {
+  Dimensions
+} from 'react-native'
 
-const deviceH = Dimensions.get('window').height
-
-const deviceW = Dimensions.get('window').width
-
-const basePx = 375
-
-export default function px2dp(px) {
-
-  return px * deviceW / basePx
-
+const viewPortWidth = 750;//这里是设计稿的宽度
+export const Px2dp = (px) => {
+  return px * Dimensions.get('window').width / viewPortWidth
 }

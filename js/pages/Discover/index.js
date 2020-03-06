@@ -7,7 +7,8 @@ import {
   Image,
   TextInput,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  StatusBar
 } from 'react-native'
 import NavigationBar from '../../component/NavigationBar'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -17,6 +18,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Banner from '../../component/Banner'
 import Menu from '../Home/Menu'
 
+const ANDROID_STATUBAR_HEIGHT = StatusBar.currentHeight
 const THEME_COLOR = 'white'
 export default class Discover extends Component {
   constructor(props) {
@@ -86,12 +88,7 @@ export default class Discover extends Component {
     )
   }
   render() {
-    let statusBar = {
-      backgroundColor: 'white',
-      barStyle: 'light-content',
-    }
     let navigationBar = <NavigationBar
-      statusBar={statusBar}
       renderLeftContent={this.getLeftContent()}
       renderRightButton={this.getRightButton()}
       style={{ backgroundColor: THEME_COLOR }}

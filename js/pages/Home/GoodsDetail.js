@@ -17,6 +17,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Swiper from 'react-native-swiper';
 import Carousel from 'react-native-snap-carousel'
 
+const offsetTopHeight = -50
 const { width } = Dimensions.get('window');
 const DOT_WIDTH = 8
 const GOODS_RED = '#ef5a62'
@@ -273,7 +274,7 @@ export default class GoodsDetail extends Component {
       statusBar={statusBar}
       renderLeftContent={this.getLeftButton()}
       renderRightButton={this.getRightButton()}
-      style={{ backgroundColor: 'white' }}
+      style={{ backgroundColor: 'transparent' }}
     />
     return (
       <View>
@@ -310,7 +311,7 @@ export default class GoodsDetail extends Component {
                     <Image
                       style={styles.image}
                       source={item.bannerImg}
-                      resizeMode='cover'
+                      // resizeMode='cover'
                     />
                   </View>
                 ))
@@ -334,18 +335,23 @@ export default class GoodsDetail extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: 180,
+    height: 320,
+    position: 'relative',
+    top: offsetTopHeight,
+    left: 0,
+    marginBottom: offsetTopHeight,
+    elevation: -2
   },
   wrapper: {
     width: '100%',
-    height: 180,
+    height: '100%',
   },
   slide: {
     backgroundColor: 'transparent'
   },
   image: {
     width,
-    height: 180,
+    height: '100%',
   },
   leftBtn: {
     flexDirection: 'row'

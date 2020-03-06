@@ -18,16 +18,17 @@ import Banner from '../../component/Banner'
 import Menu from './Menu'
 import GoodsList from './GoodsList';
 import GoodsCard from './GoodsCard';
-import { Px2dp } from '../../utils/Px2dp'
+import NavigationUtils from '../../navigators/NavigationUtils'
 
 const ANDROID_STATUBAR_HEIGHT = StatusBar.currentHeight
-const offsetTopHeight = -50-ANDROID_STATUBAR_HEIGHT
+const offsetTopHeight = -50 - ANDROID_STATUBAR_HEIGHT
 const THEME_COLOR = '#678'
 const LOCATION = '上海市'
 const TABS = ['推荐', '手机专区', '服饰专区', '母婴专区', '电脑专区', '拼团专区']
 export default class Home extends Component {
   constructor(props) {
     super(props)
+    this.navBar = null
     this.menuList = [
       {
         label: '超市',
@@ -71,22 +72,24 @@ export default class Home extends Component {
       },
     ]
     this.state = {
-      navBarStyle: {
-        backgroundColor: "transparent",
-      },
+      borderStyle: {},
+      searchColor: 'white',
+      inputTextColor: '#bbb',
+      iconColor: 'white',
+      iconBackgroundColor: 'rgba(0,0,0,.48)',
       statusBarbackgroundColor: "transparent",
       bannerList: [
-        {bannerImg: require('./Demo/img/1.jpg')},
-        {bannerImg: require('./Demo/img/2.jpg')},
-        {bannerImg: require('./Demo/img/3.jpg')},
-        {bannerImg: require('./Demo/img/4.jpg')},
-        {bannerImg: require('./Demo/img/5.jpg')}
+        { bannerImg: require('./Demo/img/1.jpg') },
+        { bannerImg: require('./Demo/img/2.jpg') },
+        { bannerImg: require('./Demo/img/3.jpg') },
+        { bannerImg: require('./Demo/img/4.jpg') },
+        { bannerImg: require('./Demo/img/5.jpg') }
       ]
     }
   }
   getLeftButton() {
     return <TouchableOpacity
-      style={[styles.navBtn,styles.leftBtn]}
+      style={[styles.navBtn, styles.leftBtn,{backgroundColor: this.state.iconBackgroundColor}]}
     >
       {/* <Text
         style={{ fontSize: 18, color: 'white', fontWeight: 'bold' }}
@@ -96,15 +99,15 @@ export default class Home extends Component {
         size={26}
         style={{ color: 'white' }}
       /> */}
-       <Ionicons
+      <Ionicons
         name={'ios-qr-scanner'}
         size={22}
-        style={{ color: 'white',opacity: 1 }}
+        style={{ color: this.state.iconColor }}
       />
     </TouchableOpacity>
   }
   getRightButton() {
-    return <View style={{flexDirection: 'row'}}>
+    return <View style={{ flexDirection: 'row' }}>
       {/* <TouchableOpacity style={[styles.navBtn,styles.btnMargin]}
     >
       <Ionicons
@@ -113,29 +116,36 @@ export default class Home extends Component {
         style={{ color: 'white',opacity: 1 }}
       />
     </TouchableOpacity> */}
-    <TouchableOpacity style={styles.navBtn}>
-    <AntDesign
-        name={'message1'}
-        size={22}
-        style={{ color: 'white' }}
-      />
-    </TouchableOpacity>
+      <TouchableOpacity onPress={() => NavigationUtils.goPage('ParallaxHeader')} style={[styles.navBtn,{backgroundColor: this.state.iconBackgroundColor}]}>
+        <AntDesign
+          name={'message1'}
+          size={22}
+          style={{ color: this.state.iconColor }}
+        />
+      </TouchableOpacity>
     </View>
   }
   getSearchInput() {
-    return <View style={styles.inputContainer}>
+    return <TouchableOpacity style={styles.inputContainer}>
       <EvilIcons
         name={"search"}
         size={26}
-        style={styles.search}
+        style={[styles.search,{color: this.state.inputTextColor}]}
       />
       <TextInput
-        style={styles.TextInput}
+        style={[
+          styles.TextInput,
+          {
+            borderColor: this.state.searchColor,
+            backgroundColor: this.state.searchColor,
+            color: this.state.inputTextColor
+          }
+        ]}
         onChangeText={() => this.onChangeText()}
         placeholder={'搜索商家或商品名称'}
-        placeholderTextColor={'#bbb'}
+        placeholderTextColor={this.state.inputTextColor}
       />
-    </View>
+    </TouchableOpacity>
   }
   onChangeText() {
 
@@ -162,60 +172,64 @@ export default class Home extends Component {
       </View>
     )
   }
-  _onScroll(e) {
+  _onScroll = (e) => {
     let y = e.nativeEvent.contentOffset.y
-    let opacityPercent = y / 200
+    let opacityPercent = y / 100
     if (y > 10) {
-      // this.navBar.setNativeProps({
-      //   style: {backgroundColor: 'red' }
-      // })
-      console.log("===================")
+      this.navBar && this.navBar.setNativeProps({
+        style: { backgroundColor: `rgba(255,255,255,${opacityPercent})` }
+      })
       this.setState({
-        navBarStyle: {
-          backgroundColor: '#FF9100'
-        },
-        statusBarbackgroundColor: 'white'
+        statusBarbackgroundColor: '#484848',
+        searchColor: '#eee',
+        inputTextColor: '#aaa',
+        iconColor: '#000',
+        borderStyle: { borderBottomWidth: 1,borderColor: `rgba(229,229,229,${opacityPercent})` },
+        iconBackgroundColor: `rgba(255,255,255,${opacityPercent})`
       })
     } else {
+      this.navBar && this.navBar.setNativeProps({
+        style: { backgroundColor: `rgba(255,255,255,${opacityPercent})` }
+      })
       this.setState({
-        navBarStyle: {
-          backgroundColor: 'transparent'
-        },
-        statusBarbackgroundColor: 'transparent'
+        statusBarbackgroundColor: 'transparent',
+        searchColor: 'white',
+        inputTextColor: '#bbb',
+        iconColor: 'white',
+        borderStyle: {borderColor: `rgba(229,229,229,${opacityPercent})`},
+        iconBackgroundColor: 'rgba(0,0,0,.48)'
       })
     }
   }
   // onStop = (e) => {
   //   let { x, y } = e.nativeEvent.contentOffset;
-  //   if (y < px2dp(50)) {
+  //   if (y < Px2dp(50)) {
   //     this._scrollView.scrollTo({ x: 0, y: 0, animated: true })
-  //   } else if (y < px2dp(100)) {
-  //     this._scrollView.scrollTo({ x: 0, y: px2dp(100), animated: true })
+  //   } else if (y < Px2dp(100)) {
+  //     this._scrollView.scrollTo({ x: 0, y: Px2dp(100), animated: true })
   //   }
   // }
 
   render() {
     let statusBar = {
-      // backgroundColor: this.state.statusBarbackgroundColor, // 单独设置吸顶状态栏样式
+      backgroundColor: this.state.statusBarbackgroundColor,
+      barStyle: 'light-content'
     }
     let navigationBar = <NavigationBar
+      barRef={el => this.navBar = el}
       statusBar={statusBar}
       renderLeftContent={this.getLeftButton()}
       renderRightButton={this.getRightButton()}
       searchInput={this.getSearchInput()}
-      style={this.state.navBarStyle}
+      style={this.state.borderStyle}
     />
-    let test = <View
-      ref={ref => this.navBar = ref}
-      style={{ height: 100, backgroundColor: 'red', opacity: 1 }}
-    ><Text>sdhfkdsjfsdj</Text></View>
     return (
       <ScrollView
         style={styles.container}
         showsVerticalScrollIndicator={false}
         stickyHeaderIndices={[0]}
         onScrollEndDrag={this.onStop}
-        onScroll={this._onScroll.bind(this)}
+        onScroll={this._onScroll}
         ref={(component) => { this._scrollView = component }}
       >
         {navigationBar}
@@ -228,13 +242,13 @@ export default class Home extends Component {
             marginBottom: offsetTopHeight,
           }}
         />
-        <Menu MenuList={this.menuList} cellStyle={{width: '20%'}}/>
+        <Menu MenuList={this.menuList} cellStyle={{ width: '20%' }} />
         {this.getBanner()}
-        <GoodsCard goodsCardType={'day'}/>
-        <GoodsCard goodsCardType={'life'}/>
-        <GoodsCard goodsCardType={'computer'}/>
-        <GoodsCard goodsCardType={'fashion'}/>
-        <GoodsCard goodsCardType={'drink'}/>
+        <GoodsCard goodsCardType={'day'} />
+        <GoodsCard goodsCardType={'life'} />
+        <GoodsCard goodsCardType={'computer'} />
+        <GoodsCard goodsCardType={'fashion'} />
+        <GoodsCard goodsCardType={'drink'} />
         <GoodsList />
       </ScrollView>
     )
@@ -258,7 +272,6 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   navBtn: {
-    backgroundColor:'rgba(0,0,0,0.34)',
     paddingTop: 4,
     paddingBottom: 4,
     paddingLeft: 6,
@@ -273,19 +286,16 @@ const styles = StyleSheet.create({
   },
   TextInput: {
     fontSize: 13,
-    color: '#e5e5e5',
     height: 34,
-    borderColor: 'white',
     borderWidth: 1,
     borderRadius: 14,
     padding: 0,
     paddingLeft: 34,
     paddingRight: 10,
-    backgroundColor: 'white',
     zIndex: -999,
+    color: '#000'
   },
   search: {
-    color: '#bbb',
     position: 'absolute',
     top: 6,
     left: 8,

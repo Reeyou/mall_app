@@ -8,31 +8,34 @@ import {
   Image,
   Dimensions,
   ScrollView,
-  ART
+  ART,
 } from 'react-native'
 import NavigationBar from '../../component/NavigationBar'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Menu from '../Home/Menu'
 import RecommendGoods from '../../component/RecommendGood'
-import Resolution from "../../utils/Px2dp"
 
 const ANDROID_STATUBAR_HEIGHT = StatusBar.currentHeight
-const offsetTopHeight = -50-ANDROID_STATUBAR_HEIGHT
+const offsetTopHeight = -50 - ANDROID_STATUBAR_HEIGHT
 const WIDTH = Dimensions.get('window').width
 const THEME_COLOR = 'white'
 const {
   Surface, //  一个矩形可渲染的区域，是其他元素的容器
-  Group, // 可容纳多个形状、文本和其他的分组
   Shape, // 形状定义，可填充
   Path, // 路径
-  LinearGradient, // 渐变色
-  Pattern, // 填充图片
-  ClippingRectangle, // 剪辑
 } = ART;
 export default class User extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      statusBarbackgroundColor: "transparent",
+      navBarColor: '#ccc',
+      iconColor: 'white',
+      isShow: false,
+      borderStyle: {},
+    }
+    this.navBar = null
     this.menuList = [
       { label: '商城公告', menuIcon: require("../Home/Menu/icons/chaoshi.png") },
       { label: '图片专区', menuIcon: require('../Home/Menu/icons/shuma.png') },
@@ -49,9 +52,13 @@ export default class User extends Component {
     return <TouchableOpacity
       style={{ flexDirection: 'row' }}
     >
-      <Text
-        style={styles.title}
-      >个人中心</Text>
+      {
+        this.state.isShow ? <Image
+          style={{ width: 30, height: 30, borderRadius: 30 }}
+          source={require('../Home/Demo/img/2.jpg')}
+          resizeMode='cover'
+        /> : null
+      }
     </TouchableOpacity>
   }
   getRightButton() {
@@ -61,11 +68,17 @@ export default class User extends Component {
       <AntDesign
         name={'message1'}
         size={22}
-        style={{ color: '#fff' }}
+        style={{ color: this.state.iconColor }}
       />
     </TouchableOpacity>
   }
-
+  renderTitle() {
+    return(
+      <View>
+        {this.state.isShow ?<Text style={styles.title}>我的</Text>:null}
+      </View>
+    )
+  }
   // 绘制用户信息贝塞尔曲线
   _renderCurve() {
     let d_path = Path('M 0 0 h 360 v 183.1 C 300 207 240 219 180 219 S 60 207 0 183.1 V 0 Z M 0 0 h 360 v 183.1 C 300 207 240 219 180 219 S 60 207 0 183.1 V 0 Z M 0 0 h 360 v 183.1 C 300 207 240 219 180 219 S 60 207 0 183.1 V 0 Z');
@@ -127,24 +140,60 @@ export default class User extends Component {
       </View>
     )
   }
-
+  _onScroll = (e) => {
+    let y = e.nativeEvent.contentOffset.y
+    let opacityPercent = y / 100
+    if (y > 10) {
+      this.navBar && this.navBar.setNativeProps({
+        style: { backgroundColor: `rgba(255,255,255,${opacityPercent})` }
+      })
+      this.setState({
+        statusBarbackgroundColor: '#484848',
+        navBarColor: `rgba(255,255,255,${opacityPercent})`,
+        iconColor: `rgba(0,0,0,${opacityPercent})`,
+        borderStyle: { borderBottomWidth: 1,borderColor: `rgba(229,229,229,${opacityPercent})` },
+      })
+      if(opacityPercent > 0.88) {
+        this.setState({
+          isShow: true
+        })
+      } else {
+        this.setState({
+          isShow: false
+        })
+      }
+    } else {
+      this.navBar && this.navBar.setNativeProps({
+        style: { backgroundColor: `rgba(255,255,255,${opacityPercent})` }
+      })
+      this.setState({
+        statusBarbackgroundColor: "transparent",
+        navBarColor: `rgba(255,255,255,${opacityPercent})`,
+        borderStyle: {borderColor: `rgba(229,229,229,${opacityPercent})`},
+        iconColor: 'white',
+      })
+    }
+  }
   render() {
-   
-
     let statusBar = {
-      // backgroundColor: 'transparent',
-      // barStyle: 'light-content',
-      // hidden: true
+      backgroundColor: this.state.statusBarbackgroundColor,
+      barStyle: 'light-content'
     }
     let navigationBar = <NavigationBar
+      barRef={el => this.navBar = el}
       statusBar={statusBar}
       renderLeftContent={this.getLeftContent()}
       renderRightButton={this.getRightButton()}
-      style={{ backgroundColor: 'transparent' }}
+      searchInput={this.renderTitle()}
+      contentStyle={{justifyContent: 'center'}}
+      style={this.state.borderStyle}
     />
     return (
       <ScrollView style={styles.container}
         showsVerticalScrollIndicator={false}
+        onScroll={this._onScroll}
+        stickyHeaderIndices={[0]}
+        ref={(component) => { this._scrollView = component }}
       >
         {navigationBar}
         {this._renderUserInfo()}
@@ -164,9 +213,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    color: '#fff',
+    color: '#000',
     fontWeight: 'bold',
-    marginRight: 10
+    marginRight: 10,
+    textAlign: 'center'
   },
   TextInput: {
     fontSize: 13,

@@ -7,13 +7,15 @@ import {
   Button,
   TextInput,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  StatusBar
 } from 'react-native'
 import NavigationBar from '../../component/NavigationBar'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import CheckBox from 'react-native-check-box'
 
 import { BoxShadow } from 'react-native-shadow'
+const ANDROID_STATUBAR_HEIGHT = StatusBar.currentHeight
 const SHADOW_WIDTH = Dimensions.get('window').width - 40
 const THEME_COLOR = 'white'
 export default class ShopCart extends Component {
@@ -126,13 +128,7 @@ export default class ShopCart extends Component {
     )
   }
   render() {
-    let statusBar = {
-      backgroundColor: THEME_COLOR,
-      barStyle: 'light-content',
-      // hidden: true
-    }
     let navigationBar = <NavigationBar
-      statusBar={statusBar}
       renderLeftContent={this.getLeftContent()}
       renderRightButton={this.getRightButton()}
       style={{ backgroundColor: THEME_COLOR }}

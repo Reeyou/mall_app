@@ -19,6 +19,7 @@
     "react-native-elements": "^1.2.7",
     "react-native-gesture-handler": "^1.6.0",
     "react-native-linear-gradient": "^2.5.6",
+    "react-native-parallax-scroll-view": "^0.21.3",
     "react-native-reanimated": "^1.7.0",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.1.0",

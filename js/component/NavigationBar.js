@@ -46,13 +46,11 @@ export default class NavigationBar extends Component {
   }
   render() {
     // 状态栏
-    let statusBar = !this.props.statusBar.hidden ?
+    let statusBar = !this.props.statusBar.hidden ? 
       <View style={styles.statusBar}>
         <StatusBar 
-          backgroundColor='transparent'
-          // {...this.props.statusBar}
+          {...this.props.statusBar}
           translucent //设置状态栏是否为透明
-          barStyle={'dark-content'}
         />
       </View> : null
 
@@ -62,8 +60,7 @@ export default class NavigationBar extends Component {
 
     // 导航栏内容
     let navBar = !this.props.hide ?
-        <View>
-          <View style={[styles.navBar,this.props.style]}>
+          <View ref={this.props.barRef} style={[styles.navBar,this.props.style]}>
             {/* 获取左侧按钮 */}
             {this.getButtonElement(this.props.renderLeftContent)}
             {/* 获取中间区域内容 */}
@@ -72,18 +69,9 @@ export default class NavigationBar extends Component {
             </View>
             {/* 获取右侧按钮 */}
             {this.getButtonElement(this.props.renderRightButton)}
-          </View>
-        </View> : null
+          </View> : null
 
     return (
-        // <LinearGradient
-        // start={{ x : 0, y : 1 }}
-        // end={{ x : 1, y : 1 }}
-        // colors={[ '#FF9100', '#FF6500' ]}
-        // >
-        //   {statusBar}
-        //   {navBar}
-        // </LinearGradient>
         <View style={this.props.style}>
           {statusBar}
           {navBar}
@@ -92,9 +80,6 @@ export default class NavigationBar extends Component {
   }
 }
 const styles = StyleSheet.create({
-  container: {
-    // backgroundColor: 'red'
-  },
   navBar: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -105,8 +90,6 @@ const styles = StyleSheet.create({
   },
   navContent: {
     flex: 1,
-    // marginRight: 10,
-    // marginLeft: 10
   },
   navButton: {
     alignItems: 'center'

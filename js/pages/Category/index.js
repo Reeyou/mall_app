@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {
   StyleSheet,
   Text,
-  Button,
+  StatusBar,
   Image,
   View,
   TextInput,
@@ -17,6 +17,7 @@ import NavigationBar from '../../component/NavigationBar'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import Request from '../../utils/Request'
 
+const ANDROID_STATUBAR_HEIGHT = StatusBar.currentHeight
 const THEME_COLOR = 'white'
 const CITY_NAMES = [
   [
@@ -165,9 +166,8 @@ export default class Category extends Component {
   }
   render() {
     let statusBar = {
-      backgroundColor: 'white',
-      barStyle: 'light-content',
-      // hidden: true
+      backgroundColor: '#484848',
+      barStyle: 'light-content'
     }
     let navigationBar = <NavigationBar
       statusBar={statusBar}

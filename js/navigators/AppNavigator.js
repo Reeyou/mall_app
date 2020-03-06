@@ -3,6 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack'
 import Welcome from '../pages/Welcome'
 import Index from '../pages'
 import GoodsDetail from '../pages/Home/GoodsDetail'
+import ParallaxHeader from '../pages/Home/parallaxHeader'
 
 const InitNavigator = createStackNavigator({
   Welcome: {
@@ -21,6 +22,12 @@ const MainNavigator = createStackNavigator({
   },
   GoodsDetail: {
     screen: GoodsDetail,
+    navigationOptions: {
+      headerShown: false
+    }
+  },
+  ParallaxHeader: {
+    screen: ParallaxHeader,
     navigationOptions: {
       headerShown: false
     }

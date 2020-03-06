@@ -9,6 +9,7 @@ import {
   Dimensions,
   TouchableOpacity
 } from 'react-native';
+import NavigationUtils from '../../../navigators/NavigationUtils'
 import Swiper from 'react-native-swiper';
 const { width } = Dimensions.get('window');
 const DOT_WIDTH = 8
@@ -19,23 +20,26 @@ export default class Menu extends Component {
       swiperShow: false,
       activeDotWidth: 14
     }
+    
   }
   static propTypes = {
     cellStyle: ViewPropTypes.style,
     MenuList: PropTypes.array,
   }
-  _renderItem(data) {    
+  _renderItem(data) {   
     return <View style={styles.container}>
       {
         data.map((item, index) => (
-          <View style={[styles.cell,this.props.cellStyle]}>
+          <TouchableOpacity
+            style={[styles.cell,this.props.cellStyle]}
+            onPress={() => NavigationUtils.goPage('GoodsDetail')}>
             <Image
               style={styles.image}
               source={item.menuIcon}
               resizeMode='cover'
             />
             <Text style={styles.label}>{item.label}</Text>
-          </View>
+          </TouchableOpacity>
         
     
         ))

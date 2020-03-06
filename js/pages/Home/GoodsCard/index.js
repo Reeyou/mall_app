@@ -130,7 +130,6 @@ export default class GoodsCard extends BaseCard {
   }
 
   render() {
-    console.log(this.props.goodsCardType)
     return (
       <View>
         {

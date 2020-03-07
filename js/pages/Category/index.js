@@ -15,7 +15,7 @@ import {
 } from 'react-native'
 import NavigationBar from '../../component/NavigationBar'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
-import Request from '../../utils/Request'
+import DataRequest from '../../utils/DataRequest'
 
 const ANDROID_STATUBAR_HEIGHT = StatusBar.currentHeight
 const THEME_COLOR = 'white'
@@ -40,12 +40,12 @@ export default class Category extends Component {
       showText: '',
       activeIndex: 0
     }
-    this.Request = new Request()
+    this.DataRequest = new DataRequest()
   }
   loadData() {
     // http://api.github.com/search/repositories?q=java
     let url = 'http://192.168.0.102:3000/admin/getCategoryList'
-    this.Request.fetchData(url)
+    this.DataRequest.fetchData(url)
       .then(data => {
         let showData = `初次加载时间：${new Date(data.timestamp)}\n${JSON.stringify(data.data)}`
         this.setState({

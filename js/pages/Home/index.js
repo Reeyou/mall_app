@@ -106,6 +106,10 @@ export default class Home extends Component {
       />
     </TouchableOpacity>
   }
+  goToPage() {
+    console.log(1)
+    NavigationUtils.goPage('Goods')
+  }
   getRightButton() {
     return <View style={{ flexDirection: 'row' }}>
       {/* <TouchableOpacity style={[styles.navBtn,styles.btnMargin]}
@@ -116,7 +120,7 @@ export default class Home extends Component {
         style={{ color: 'white',opacity: 1 }}
       />
     </TouchableOpacity> */}
-      <TouchableOpacity onPress={() => NavigationUtils.goPage('ParallaxHeader')} style={[styles.navBtn,{backgroundColor: this.state.iconBackgroundColor}]}>
+      <TouchableOpacity onPress={() => this.goToPage()} style={[styles.navBtn,{backgroundColor: this.state.iconBackgroundColor}]}>
         <AntDesign
           name={'message1'}
           size={22}

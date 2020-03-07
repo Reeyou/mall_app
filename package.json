@@ -21,6 +21,7 @@
     "react-native-linear-gradient": "^2.5.6",
     "react-native-parallax-scroll-view": "^0.21.3",
     "react-native-reanimated": "^1.7.0",
+    "react-native-root-modal": "^5.0.0",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.1.0",
     "react-native-shadow": "^1.2.2",

@@ -1,5 +1,5 @@
-import DataRequest from '../utils/DataRequest';
-const request = new DataRequest();
+import Request from '../utils/request';
+const request = new Request();
 
 export function getCategoryList() {
   return request.fetchNetData('/admin/getCategoryList');

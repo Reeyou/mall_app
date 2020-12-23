@@ -7,7 +7,16 @@ import { createStackNavigator, CardStyleInterpolators } from "@react-navigation/
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 
 // screens
-import { Welcome, Detail, GoodsDetail, Login, Register } from "../pages";
+import {
+  Welcome,
+  Detail,
+  GoodsDetail,
+  Login,
+  Register,
+  example,
+  Userinfo,
+  Setting 
+} from "../pages";
 // extra screens
 import Tabs from "./Tabs";
 
@@ -42,7 +51,7 @@ export default function Navigation() {
     
                 <Stack.Screen
                     name="Detail"
-                    component={Detail}
+                    component={example}
                 />
                 <Stack.Screen
                     name="GoodsDetail"
@@ -57,6 +66,15 @@ export default function Navigation() {
                 <Stack.Screen
                     name="Register"
                     component={Register}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Userinfo"
+                    component={Userinfo}
+                />
+                <Stack.Screen
+                    name="Setting"
+                    component={Setting}
                     options={{ headerShown: false }}
                 />
     

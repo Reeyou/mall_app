@@ -10,9 +10,11 @@ export const COLORS = {
 
     // colors
     black: '#323643',
+    bb: '#bbb',
     white: '#FFFFFF',
     lightGray: '#C5CCD6',
     gray: '#8b9097',
+    bgGray: '#f8f8f8',
 };
 export const SIZES = {
     // global sizes

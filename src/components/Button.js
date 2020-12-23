@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { StyleSheet, TouchableOpacity } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { COLORS, SIZES } from '../constants'
+import { Block, Spin } from '../components'
 
 export default class Button extends Component {
-  render() {
+  render () {
     const {
       style,
       opacity,
@@ -17,6 +18,8 @@ export default class Button extends Component {
       locations,
       shadow,
       children,
+      disabled,
+      loading,
       ...props
     } = this.props;
 
@@ -49,13 +52,15 @@ export default class Button extends Component {
     }
 
     return (
-      <TouchableOpacity
+      !disabled ? <TouchableOpacity
         style={buttonStyles}
         activeOpacity={opacity || 0.8}
         {...props}
       >
+        {/* loading ? <Spin /> : null */}
         {children}
       </TouchableOpacity>
+        : <Block style={buttonStyles}>{children}</Block>
     );
   }
 }

@@ -6,6 +6,7 @@ import {
   View,
 } from 'react-native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
+import { COLORS } from '../constants'
 
 export default class SearchBar extends Component {
 
@@ -24,7 +25,7 @@ export default class SearchBar extends Component {
           style={styles.TextInput}
           onChangeText={(val) => this.onChangeText(val)}
           placeholder={this.props.placeholder}
-          placeholderTextColor={'#bbb'}
+          placeholderTextColor={COLORS.bgGray}
         />
       </View>
     );

@@ -7,6 +7,7 @@ import Button from './Button';
 import Block from './Block';
 import Text from './Text';
 import Input from './Input';
+import Toast from './Toast';
 
 export {
   Header,
@@ -17,5 +18,6 @@ export {
   Button,
   Block,
   Text,
-  Input
+  Input,
+  Toast
 }

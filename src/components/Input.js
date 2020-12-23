@@ -18,7 +18,7 @@ export default class Input extends Component {
     return (
       <Block flex={false}>
         {label ? (
-          <Text lightGray={!error} accent={error}>
+          <Text black={!error} accent={error}>
             {label}
           </Text>
         ) : null}
@@ -51,12 +51,13 @@ export default class Input extends Component {
   }
 
   renderRight() {
-    const { rightLabel, rightStyle, onRightPress } = this.props;
+    const { rightLabel, rightStyle, disabled, onRightPress } = this.props;
 
     if (!rightLabel) return null;
 
     return (
       <Button
+        disabled={disabled}
         style={[styles.toggle, rightStyle]}
         onPress={() => onRightPress && onRightPress()}
       >
@@ -66,7 +67,7 @@ export default class Input extends Component {
   }
 
   render() {
-    const { email, phone, number, secure, error, style, ...props } = this.props;
+    const { email, phone, number, secure, error, placeholder, style, ...props } = this.props;
 
     const { toggleSecure } = this.state;
     const isSecure = toggleSecure ? false : secure;
@@ -95,6 +96,8 @@ export default class Input extends Component {
           autoCapitalize="none"
           autoCorrect={false}
           keyboardType={inputType}
+          placeholder={placeholder}
+          placeholderTextColor={COLORS.lightGray}
           {...props}
         />
         {this.renderToggle()}
@@ -112,14 +115,17 @@ const styles = StyleSheet.create({
     fontSize: SIZES.font,
     fontWeight: "500",
     color: COLORS.black,
-    height: SIZES.base * 3
+    height: SIZES.base * 3,
+    paddingHorizontal: SIZES.base/2,
+    marginTop: SIZES.base/2
   },
   toggle: {
     position: "absolute",
     alignItems: "center",
     width: SIZES.base * 2,
     height: SIZES.base * 2,
-    top: SIZES.base,
-    right: 0
+    top: SIZES.base*1.7,
+    right: SIZES.base/2,
+    backgroundColor: 'transparent'
   }
 });

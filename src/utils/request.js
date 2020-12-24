@@ -96,16 +96,18 @@ export default class Request {
         body: JSON.stringify(params),
       })
         .then(res => {
-          if (res.ok) {
+          console.log(res)
+          // if (res.ok) {
             return res.json();
-          }
-          throw new Error('Network response was not ok');
+          // }
+          // throw new Error('err');
         })
         .then(res => {
           this.saveData(this.baseUrl + url, res);
           resolve(res);
         })
         .catch(err => {
+          console.log(err)
           reject(err);
         });
     });

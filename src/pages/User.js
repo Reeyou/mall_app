@@ -11,11 +11,12 @@ import {
   ScrollView,
 } from 'react-native';
 import ART from '@react-native-community/art'
-import { Header, Swiper } from '../components';
+import { Header, Block, Swiper } from '../components';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const ANDROID_STATUBAR_HEIGHT = StatusBar.currentHeight;
 const offsetTopHeight = -50 - ANDROID_STATUBAR_HEIGHT;
@@ -26,10 +27,13 @@ const THEME_COLOR = 'white';
 //   Shape, // 形状定义，可填充
 //   Path, // 路径
 // } = ART;
+// let result = {}
+// result = JSON.parse(AsyncStorage.getItem('userinfo'))
 export default class User extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      username: null,
       statusBarbackgroundColor: 'transparent',
       navBarColor: '#ccc',
       iconColor: 'white',
@@ -43,18 +47,18 @@ export default class User extends Component {
       ]
     };
     this.navBar = null;
-    this.menuList = [
-      { label: '商城公告', menuIcon: require('../assets/images/11.png') },
-      { label: '图片专区', menuIcon: require('../assets/images/11.png') },
-      { label: '视频专区', menuIcon: require('../assets/images/11.png') },
-      { label: '商城资讯', menuIcon: require('../assets/images/11.png') },
-      { label: '视频专区', menuIcon: require('../assets/images/11.png') },
-      { label: '商城资讯', menuIcon: require('../assets/images/11.png') },
-    ];
   }
-  // componentWillMount() {
-  //   this._renderCurve();
-  // }
+  UNSAFE_componentWillMount () {
+    AsyncStorage.getItem('userinfo').then(result => {
+      if (result) {
+        this.setState({
+          username: JSON.parse(result).userinfo.username
+        }, () => {
+          console.log(this.state.username)
+        })
+      }
+    })
+  }
   getLeftContent () {
     return (
       <TouchableOpacity style={{ flexDirection: 'row', marginLeft: 18 }}>
@@ -70,24 +74,28 @@ export default class User extends Component {
   }
   getRightButton () {
     return (
-      <TouchableOpacity style={{ flexDirection: 'row' }}>
-        <Ionicons
-          name={'settings-outline'}
-          size={22}
-          style={{ color: this.state.iconColor }}
-        />
-        <Ionicons
-          name={'chatbubble-ellipses-outline'}
-          size={22}
-          style={{ color: this.state.iconColor, marginLeft: 10 }}
-        />
-      </TouchableOpacity>
+      <Block row center>
+        <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Setting')}>
+          <Ionicons
+            name={'settings-outline'}
+            size={22}
+            style={{ color: this.state.iconColor }}
+          />
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback>
+          <Ionicons
+            name={'chatbubble-ellipses-outline'}
+            size={22}
+            style={{ color: this.state.iconColor, marginLeft: 10 }}
+          />
+        </TouchableWithoutFeedback>
+      </Block>
     );
   }
   renderTitle () {
     return (
       <View>
-        {this.state.isShow ? <Text style={{color: '#fff', marginLeft: 10}}>我的</Text> : null}
+        {this.state.isShow ? <Text style={{ color: '#fff', marginLeft: 10 }}>我的</Text> : null}
       </View>
     );
   }
@@ -107,9 +115,16 @@ export default class User extends Component {
   //     </Surface>
   //   );
   // }
-
-  _renderUserInfo () {
+  handleUser () {
     const { navigation } = this.props;
+    if (this.state.username) {
+      navigation.navigate('Userinfo')
+    } else {
+      navigation.navigate('Login')
+    }
+  }
+  _renderUserInfo () {
+    const { username } = this.state
     return (
       <View style={styles.userInfo}>
         <View
@@ -117,19 +132,23 @@ export default class User extends Component {
             width: WIDTH,
             backgroundColor: 'rgb(236, 75, 52)',
           }}>
-          <View style={styles.user_content}>
+          <TouchableWithoutFeedback style={styles.user_content} onPress={() => this.handleUser()}>
             <Image
               style={styles.avatar}
               source={require('../assets/images/12.png')}
               resizeMode="cover"
             />
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
-              <View style={styles.login_content}>
-                <Text style={styles.login_text}>登录/注册</Text>
-                <AntDesign name={'right'} size={14} style={{ color: '#fff' }} />
-              </View>
-            </TouchableOpacity>
-          </View>
+            {
+              username
+                ? <View style={styles.login_content}>
+                  <Text style={styles.login_text}>{this.state.username}</Text>
+                </View>
+                : <View style={styles.login_content}>
+                  <Text style={styles.login_text}>登录/注册</Text>
+                  <AntDesign name={'right'} size={14} style={{ color: '#fff' }} />
+                </View>
+            }
+          </TouchableWithoutFeedback>
         </View>
         {/* {this._renderCurve()} */}
       </View>
@@ -223,7 +242,7 @@ export default class User extends Component {
           ))}
         </View>
 
-        <Swiper style={{ marginTop: 10 }} swiperList={this.state.swiperList} />
+        <Swiper style={{ marginTop: 20 }} swiperList={this.state.swiperList} />
       </View>
     );
   }
@@ -397,7 +416,7 @@ const styles = StyleSheet.create({
 
   // order //
   order_container: {
-    // height: 300,
+    flex: 1,
     marginLeft: 8,
     marginRight: 8,
     borderRadius: 10,

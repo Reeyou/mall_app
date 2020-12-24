@@ -18,11 +18,6 @@ export default function WelcomeScreen (props: any) {
     })
 
     return null
-    // return (
-    //     <View style={styles.container}>
-    //         <Text style={styles.title}>Welcome</Text>
-    //     </View>
-    // );
 }
 
 const styles = StyleSheet.create({

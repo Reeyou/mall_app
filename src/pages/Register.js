@@ -9,23 +9,35 @@ import {
   Platform
 } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { Header, Button, Block, Input, Text } from "../components";
+import { Header, Button, Block, Input, Text, Toast } from "../components";
 import { theme } from "../constants";
 import { StackActions } from '@react-navigation/native';
+import {getCode} from '../api/auth'
+
 const popAction = StackActions.pop(1);
+const timer = 60
+let _timer
 export default class Register extends Component {
   state = {
     email: null,
     username: null,
     password: null,
+    code: null,
     errors: [],
-    loading: false
+    loading: false,
+    codeLoading: false,
+    codeVisible: true,
+    codeSendTime: timer,
+    position: 'top'
   };
-
+  componentWillUnmount() {
+    clearInterval(_timer)
+  }
   handleSignUp () {
     const { navigation } = this.props;
-    const { email, username, password } = this.state;
+    const { email, username, password, code } = this.state;
     const errors = [];
+    console.log(username)
 
     Keyboard.dismiss();
     this.setState({ loading: true });
@@ -34,6 +46,7 @@ export default class Register extends Component {
     if (!email) errors.push("email");
     if (!username) errors.push("username");
     if (!password) errors.push("password");
+    if (!code) errors.push("code");
 
     this.setState({ errors, loading: false });
 
@@ -45,7 +58,7 @@ export default class Register extends Component {
           {
             text: "Continue",
             onPress: () => {
-              navigation.navigate("Browse");
+              // navigation.navigate("Browse");
             }
           }
         ],
@@ -64,9 +77,49 @@ export default class Register extends Component {
       </TouchableOpacity>
     );
   }
+  _rightLabel () {
+    const { codeLoading, codeVisible } = this.state
+    if (!codeLoading && codeVisible) {
+      return <Text black>发送</Text>
+    } else if (codeLoading && !codeVisible) {
+      return <ActivityIndicator size={28} color="red" />
+    } else {
+      return <Text lightGray>{this.state.codeSendTime}s</Text>
+    }
+  }
+  _sendCode () {
+    this.setState({codeLoading: true, codeVisible: false})
+    getCode({email: '978403496@qq.com'}).then(res => {
+      if(res.code === 200) {
+        this.refs.toast.show(res.msg);
+        this.setState({
+          codeVisible: false,
+          codeLoading: false
+        }, () => {
+          if (!this.state.codeVisible) {
+            _timer = setInterval(() => {
+              this.setState({
+                codeSendTime: (this.state.codeSendTime - 1)
+              }, () => {
+                if (this.state.codeSendTime === 0) {
+                  clearInterval(_timer)
+                  this.setState({ codeVisible: true, codeSendTime: timer })
+                }
+              })
+            }, 1000)
+          }
+        })
+      } else {
+        this.refs.toast.show(res.msg);
+        this.setState({codeLoading: false, codeVisible: true})
+      }
+    }).catch(e => {
+      console.log(e)
+    })
+  }
   render () {
     const { navigation } = this.props;
-    const { loading, errors } = this.state;
+    const { loading, errors, email, username, password, code } = this.state;
     const hasErrors = key => (errors.includes(key) ? styles.hasErrors : null);
     const statusBar = {
       backgroundColor: '#fff',
@@ -83,32 +136,39 @@ export default class Register extends Component {
             <Input
               email
               label="邮箱"
+              placeholder="请输入邮箱地址"
               error={hasErrors("email")}
               style={[styles.input, hasErrors("email")]}
-              defaultValue={this.state.email}
+              defaultValue={email}
               onChangeText={text => this.setState({ email: text })}
             />
             <Input
               label="用户名"
+              placeholder="请输入用户名"
               error={hasErrors("username")}
               style={[styles.input, hasErrors("username")]}
-              defaultValue={this.state.username}
+              defaultValue={username}
               onChangeText={text => this.setState({ username: text })}
             />
             <Input
               secure
               label="用户密码"
+              placeholder="请输入密码"
               error={hasErrors("password")}
               style={[styles.input, hasErrors("password")]}
-              defaultValue={this.state.password}
+              defaultValue={password}
               onChangeText={text => this.setState({ password: text })}
             />
             <Input
               label="验证码"
-              error={hasErrors("password")}
-              style={[styles.input, hasErrors("password")]}
-              defaultValue={this.state.password}
-              onChangeText={text => this.setState({ password: text })}
+              placeholder="请输入验证码"
+              disabled={!this.state.codeVisible}
+              rightLabel={this._rightLabel()}
+              onRightPress={() => this._sendCode()}
+              error={hasErrors("code")}
+              style={[styles.input, hasErrors("code")]}
+              defaultValue={code}
+              onChangeText={text => this.setState({ code: text })}
             />
             <Button gradient onPress={() => this.handleSignUp()}>
               {loading ? (
@@ -132,6 +192,7 @@ export default class Register extends Component {
             </Button>
           </Block>
         </Block>
+        <Toast ref="toast" position={this.state.position}/>
       </KeyboardAvoidingView>
     );
   }
@@ -144,12 +205,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
   input: {
-    borderRadius: 0,
+    borderRadius: theme.SIZES.base / 2,
     borderWidth: 0,
-    borderBottomColor: theme.COLORS.gray2,
-    borderBottomWidth: StyleSheet.hairlineWidth
+    backgroundColor: theme.COLORS.gray1,
   },
   hasErrors: {
-    borderBottomColor: theme.COLORS.accent
+    borderWidth: StyleSheet.hairlineWidth,
+    borderStyle: 'solid',
+    borderColor: theme.COLORS.accent,
   }
 });

@@ -8,7 +8,7 @@ import { StackActions } from '@react-navigation/native';
 import BackPress from '../common/BackPress';
 
 const popAction = StackActions.pop(1);
-export default class WebViewScreen extends Component {
+export default class Web extends Component {
   constructor(props) {
     super(props);
     this.params = this.props.route.params;

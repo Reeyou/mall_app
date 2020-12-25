@@ -13,9 +13,12 @@ import {
   GoodsDetail,
   Login,
   Register,
-  example,
   Userinfo,
-  Setting 
+  Setting,
+  AboutApp,
+  AboutMe,
+  Web,
+  Order
 } from "../pages";
 // extra screens
 import Tabs from "./Tabs";
@@ -48,11 +51,6 @@ export default function Navigation() {
                     component={Welcome}
                     options={{ headerShown: false }}
                 />
-    
-                <Stack.Screen
-                    name="Detail"
-                    component={example}
-                />
                 <Stack.Screen
                     name="GoodsDetail"
                     component={GoodsDetail}
@@ -75,6 +73,26 @@ export default function Navigation() {
                 <Stack.Screen
                     name="Setting"
                     component={Setting}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="AboutApp"
+                    component={AboutApp}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="AboutMe"
+                    component={AboutMe}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="WebView"
+                    component={Web}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Order"
+                    component={Order}
                     options={{ headerShown: false }}
                 />
     

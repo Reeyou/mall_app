@@ -4,7 +4,7 @@ import { Text, StyleSheet, View } from 'react-native'
 import { COLORS, SIZES } from "../constants";
 
 export default class Block extends Component {
-  handleMargins() {
+  handleMargins () {
     const { margin } = this.props;
     if (typeof margin === "number") {
       return {
@@ -50,7 +50,7 @@ export default class Block extends Component {
     }
   }
 
-  handlePaddings() {
+  handlePaddings () {
     const { padding } = this.props;
     if (typeof padding === "number") {
       return {
@@ -95,8 +95,53 @@ export default class Block extends Component {
       }
     }
   }
-  render() {
+  handleRadius () {
+    const { radius } = this.props;
+    if (typeof radius === "number") {
+      return {
+        borderTopStartRadius: radius,
+        borderBottomStartRadius: radius,
+        borderTopEndRadius: radius,
+        borderBottomEndRadius: radius
+      };
+    }
+    if (typeof radius === "object") {
+      const radiusSize = Object.keys(radius).length;
+      switch (radiusSize) {
+        case 1:
+          return {
+            borderTopStartRadius: radius[0],
+            borderBottomStartRadius: radius[0],
+            borderTopEndRadius: radius[0],
+            borderBottomEndRadius: radius[0]
+          };
+        case 2:
+          return {
+            borderTopStartRadius: radius[0],
+            borderBottomStartRadius: radius[1],
+            borderTopEndRadius: radius[0],
+            borderBottomEndRadius: radius[1]
+          };
+        case 3:
+          return {
+            borderTopStartRadius: radius[0],
+            borderBottomStartRadius: radius[1],
+            borderTopEndRadius: radius[2],
+            borderBottomEndRadius: radius[1]
+          };
+        default:
+          return {
+            borderTopStartRadius: radius[0],
+            borderBottomStartRadius: radius[1],
+            borderTopEndRadius: radius[2],
+            borderBottomEndRadius: radius[3]
+          };
+      }
+    }
+  }
+  render () {
     const {
+      block,
       flex,
       row,
       column,
@@ -107,6 +152,7 @@ export default class Block extends Component {
       top,
       bottom,
       card,
+      radius,
       shadow,
       color,
       space,
@@ -120,7 +166,7 @@ export default class Block extends Component {
     } = this.props
 
     const blockStyles = [
-      styles.block,
+      block && styles.block,
       flex && { flex },
       flex === false && { flex: 0 }, // reset / disable flex
       row && styles.row,
@@ -133,6 +179,7 @@ export default class Block extends Component {
       bottom && styles.bottom,
       margin && { ...this.handleMargins() },
       padding && { ...this.handlePaddings() },
+      radius && { ...this.handleRadius() },
       card && styles.card,
       shadow && styles.shadow,
       space && { justifyContent: `space-${space}` },

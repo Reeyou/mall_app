@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Alert, StyleSheet, View, TouchableOpacity, Image, Linking } from 'react-native'
-import { Header, Button, Block, Input, Text, Spin, Toast } from "../components";
+import { Header, Button, Block, Input, Text, Spin, Toast } from "../../components";
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { theme } from '../constants'
-import { SETTING_MENU } from '../config'
-import BaseItem from '../common/BaseItem'
+import { theme } from '../../constants'
+import { SETTING_MENU } from '../../config'
+import BaseItem from '../../common/BaseItem'
 
 export default class Setting extends Component {
   state = {
@@ -91,7 +91,7 @@ export default class Setting extends Component {
           <Block row center>
             <Image
               style={{ width: 50, height: 50, borderRadius: 50 }}
-              source={require('../assets/images/12.png')}
+              source={require('../../assets/images/12.png')}
               resizeMode="cover"
             />
 

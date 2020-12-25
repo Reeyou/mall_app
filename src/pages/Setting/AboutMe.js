@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
-import { Block, Text } from '../components'
-import About, { ABOUT_TYPE } from '../common/About';
-import { SETTING_MENU } from '../config'
-import MockData from '../constants/Mock';
-import ViewUtil from '../utils/ViewUtil'
-import { theme } from '../constants';
+import { Block, Text } from '../../components'
+import About, { ABOUT_TYPE } from '../../common/About';
+import { SETTING_MENU } from '../../config'
+import MockData from '../../constants/Mock';
+import ViewUtil from '../../utils/ViewUtil'
+import { theme } from '../../constants';
 
 export default class AboutMe extends Component {
   constructor(props) {

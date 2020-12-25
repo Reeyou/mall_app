@@ -17,6 +17,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage';
+import Parallax from '../common/Parallax'
 
 const ANDROID_STATUBAR_HEIGHT = StatusBar.currentHeight;
 const offsetTopHeight = -50 - ANDROID_STATUBAR_HEIGHT;
@@ -32,6 +33,7 @@ const THEME_COLOR = 'white';
 export default class User extends Component {
   constructor(props) {
     super(props);
+    this.parallax = new Parallax(props)
     this.state = {
       username: null,
       statusBarbackgroundColor: 'transparent',
@@ -306,73 +308,13 @@ export default class User extends Component {
       </View>
     )
   }
-  _onScroll = e => {
-    let y = e.nativeEvent.contentOffset.y;
-    let opacityPercent = y / 100;
-    if (y > 10) {
-      this.navBar &&
-        this.navBar.setNativeProps({
-          // style: { backgroundColor: `rgba(236, 75, 52,${opacityPercent})` },
-          // style: { backgroundColor: 'rgba(236, 75, 52,.1)' },
-        });
-      this.setState({
-        statusBarbackgroundColor: 'rgb(236, 75, 52)',
-        // navBarColor: `rgba(236, 75, 52,${opacityPercent})`,
-        // iconColor: ,
-      });
-      if (opacityPercent > 0.68) {
-        this.setState({
-          isShow: true,
-        });
-      } else {
-        this.setState({
-          isShow: false,
-        });
-      }
-    } else {
-      this.navBar &&
-        this.navBar.setNativeProps({
-          // style: { backgroundColor: `rgba(236, 75, 52,${opacityPercent})` },
-        });
-      this.setState({
-        statusBarbackgroundColor: 'transparent',
-        // navBarColor: `rgba(236, 75, 52,${opacityPercent})`,
-        // iconColor: 'white',
-      });
-    }
-  };
   render () {
-    let statusBar = {
-      backgroundColor: this.state.statusBarbackgroundColor,
-      barStyle: 'light-content',
-    };
-    let navigationBar = (
-      <Header
-        barRef={el => (this.navBar = el)}
-        statusBar={statusBar}
-        leftContent={this.getLeftContent()}
-        rightContent={this.getRightButton()}
-        searchInput={this.renderTitle()}
-        contentStyle={{ justifyContent: 'center' }}
-        style={[this.state.borderStyle, { backgroundColor: 'rgb(236, 75, 52)' }]}
-      />
-    );
-    return (
-      <ScrollView
-        style={styles.container}
-        showsVerticalScrollIndicator={false}
-        onScroll={this._onScroll}
-        stickyHeaderIndices={[0]}
-        ref={component => {
-          this._scrollView = component;
-        }}>
-        {navigationBar}
-        {this._renderUserInfo()}
-        {this.renderOrderTab()}
+    const contentView = <Block style={styles.container}>
+      {this.renderOrderTab()}
         {this._renderVip()}
         {this._renderRecommend()}
-      </ScrollView>
-    );
+    </Block>
+    return this.parallax.render(contentView)
   }
 }
 const styles = StyleSheet.create({

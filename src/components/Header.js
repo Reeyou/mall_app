@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   ViewPropTypes,
-  Text,
   StatusBar,
   StyleSheet,
   View,
   Platform,
   DeviceInfo,
 } from 'react-native';
+import { theme } from '../constants'
+import { Block, Text } from '../components'
 
 const ANDROID_STATUBAR_HEIGHT = StatusBar.currentHeight;
 // const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBarManager.HEIGHT
@@ -39,14 +40,13 @@ export default class Header extends Component {
   };
 
   getButtonElement (ele) {
-    return <View style={styles.navButton}>{ele ? ele : null}</View>;
+    return <Block>{ele ? ele : null}</Block>;
   }
   render () {
     let statusBar = !this.props.statusBar.hidden ? (
       <View style={styles.statusBar}>
         <StatusBar
           {...this.props.statusBar}
-          translucent
         />
       </View>
     ) : null;
@@ -54,19 +54,23 @@ export default class Header extends Component {
     let centerContent = this.props.searchInput ? (
       this.props.searchInput
     ) : (
-        <Text ellipsizeMode="head" numberOfLines={1} style={[styles.title, this.props.titleStyle]}>
+        <Text center ellipsizeMode="head" numberOfLines={1} style={[styles.title, this.props.titleStyle]}>
           {this.props.title}
         </Text>
       );
 
     let navBar = !this.props.hide ? (
-      <View ref={this.props.barRef} style={[styles.navBar, this.props.style]}>
+      <Block row center ref={this.props.barRef} style={[styles.navBar, this.props.style]}>
         {this.getButtonElement(this.props.leftContent)}
-        <View style={[styles.navContent, this.props.contentStyle]}>
+        <Block block style={[this.props.contentStyle]}>
           {centerContent}
-        </View>
-        {this.getButtonElement(this.props.rightContent)}
-      </View>
+        </Block>
+        <Block >
+          {/* 占位居中 */}
+          <Block style={{width: theme.SIZES.base * 1.5 }}></Block>
+          {this.getButtonElement(this.props.rightContent)}
+        </Block>
+      </Block>
     ) : null;
 
     return (
@@ -79,21 +83,13 @@ export default class Header extends Component {
 }
 const styles = StyleSheet.create({
   navBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-    height: 50,
+    paddingHorizontal: theme.SIZES.base,
+    height: 40,
     elevation: 999, // andriod设置层级
   },
-  navContent: {
-    flex: 1,
-  },
-  navButton: {
-    alignItems: 'center',
-  },
   title: {
-    fontSize: 20,
-    color: 'white',
+    fontSize: theme.SIZES.header,
+    color: theme.COLORS.black,
   },
   statusBar: {
     height: ANDROID_STATUBAR_HEIGHT,

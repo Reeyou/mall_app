@@ -1,0 +1,40 @@
+{
+  "aboutMe": {
+    "Blog": {
+      "name": "GitHub",
+      "url": "https://github.com/reeyou"
+    },
+    "Contact": {
+      "name": "联系方式",
+      "items": {
+        "QQ": {
+          "title": "QQ",
+          "account": "993830137"
+        },
+        "Email": {
+          "title": "Email",
+          "account": "993830137@qq.com"
+        }
+      }
+    }
+  },
+  "info": {
+    "html_url": "https://github.com/crazycodeboy/",
+    "url": "https://api.github.com/repos/crazycodeboy/",
+    "currentRepoUrl": "https://api.github.com/repos/crazycodeboy/GitHubPopular"
+  },
+  "author": {
+    "name": "Reeyou",
+    "description": "Hit me like a ray of sun",
+    "avatar": "https://avatar.csdn.net/1/1/E/1_fengyuzhengfan.jpg",
+    "backgroundImg": "https://www.devio.org/io/GitHubPopular/img/for_githubpopular_about_me.jpg",
+    "url": "https://www.devio.org/"
+  },
+  "app": {
+    "name": "华为商城",
+    "version": "1.9.6.301",
+    "description": "这是一个用来查看GitHub最受欢迎与最热项目的App,它基于React Native支持Android和iOS双平台。",
+    "avatar": "https://www.devio.org/io/GitHubPopular/img/ic_app.png",
+    "backgroundImg": "https://www.devio.org/io/GitHubPopular/img/for_githubpopular_about_me.jpg"
+  }
+}

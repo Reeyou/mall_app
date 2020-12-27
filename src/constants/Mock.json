@@ -36,5 +36,44 @@
     "description": "这是一个用来查看GitHub最受欢迎与最热项目的App,它基于React Native支持Android和iOS双平台。",
     "avatar": "https://www.devio.org/io/GitHubPopular/img/ic_app.png",
     "backgroundImg": "https://www.devio.org/io/GitHubPopular/img/for_githubpopular_about_me.jpg"
-  }
+  },
+  "goodsList": [
+    {
+      "goods_img_uri": "../assets/images/3.jpg",
+      "goods_label": "限时优惠20元",
+      "goods_name": "华为路由 WS5200 增强版NEW",
+      "goods_price": "139",
+      "goods_promotion": [
+        "限时特价",
+        "赠送积分"
+      ],
+      "comment_count": "20348",
+      "praise_percent": "98%"
+    },
+    {
+      "goods_img_uri": "../assets/images/3.jpg",
+      "goods_label": "限时优惠20元",
+      "goods_name": "华为路由11111111 WS5200 增强版NEW",
+      "goods_price": "139",
+      "goods_promotion": [
+        "限时特价",
+        "赠送积分"
+      ],
+      "comment_count": "20348",
+      "praise_percent": "98%"
+    },
+    {
+      "goods_img_uri": "../assets/images/3.jpg",
+      "goods_label": "限时优惠20元",
+      "goods_name": "华为路由 WS5200 增强版NEW",
+      "goods_price": "139",
+      "goods_promotion": [
+        "限时特价",
+        "赠送积分"
+      ],
+      "comment_count": "20348",
+      "praise_percent": "98%"
+    }
+    
+  ]
 }

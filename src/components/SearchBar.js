@@ -5,6 +5,8 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+import { Block, Text } from '../components'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import { COLORS } from '../constants'
 
@@ -12,22 +14,39 @@ export default class SearchBar extends Component {
 
   static propTypes = {
     placeholder: PropTypes.string,
+    onInput: PropTypes.bool,
   };
 
+  static defaultProps = {
+    onInput: true
+  }
+
   onChangeText (val) {
-    this.props.handleClick(val)
+    this.props.onChangeText(val)
+  }
+  onPress () {
+    this.props.onPress()
   }
   render () {
     return (
-      <View>
+      <TouchableWithoutFeedback>
         <EvilIcons name={'search'} size={26} style={styles.search} />
-        <TextInput
-          style={styles.TextInput}
-          onChangeText={(val) => this.onChangeText(val)}
-          placeholder={this.props.placeholder}
-          placeholderTextColor={COLORS.bgGray}
-        />
-      </View>
+        {
+          this.props.onInput ?
+            <TextInput
+              style={styles.TextInput}
+              onChangeText={(val) => this.onChangeText(val)}
+              placeholder={this.props.placeholder}
+              placeholderTextColor={COLORS.gray}
+            />
+            : <TouchableWithoutFeedback
+              style={styles.TextInput}
+              onPress={() => this.onPress()}
+            >
+              <Text color={'#bbb'}>{this.props.placeholder}</Text>
+            </TouchableWithoutFeedback>
+        }
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -36,6 +55,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: '#000',
     height: 34,
+    justifyContent: 'center',
     borderRadius: 14,
     padding: 0,
     paddingLeft: 34,

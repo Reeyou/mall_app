@@ -9,19 +9,19 @@ const nav_bar_height_android = 50
 const background_color = '#f3f3f4';
 export const COLORS = {
   // base colors
-  accent: "#F3534A",
+  accent: "rgb(255, 106, 110)",
   primary: '#e93b3d', // red
-  secondary: '#e43130', // Gray
+  secondary: '#ca141d', // Gray
   tertiary: '#cacfd9', //
 
   // colors
-  black: '#000',
+  black: 'rgba(0,0,0,.8)',
   black1: '#aaa',
   black2: '#eee',
   white: '#FFFFFF',
   lightGray: '#C5CCD6',
   gray: '#8b9097',
-  gray1: '#f8f8f8',
+  gray1: '#f9f9f9',
   gray2: '#efefef'
 };
 export const SIZES = {

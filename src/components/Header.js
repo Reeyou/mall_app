@@ -62,7 +62,7 @@ export default class Header extends Component {
     let navBar = !this.props.hide ? (
       <Block row center ref={this.props.barRef} style={[styles.navBar, this.props.style]}>
         {this.getButtonElement(this.props.leftContent)}
-        <Block block style={[this.props.contentStyle]}>
+        <Block block padding={[0,theme.SIZES.base/2]} style={[this.props.contentStyle]}>
           {centerContent}
         </Block>
         <Block >

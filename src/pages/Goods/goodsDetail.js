@@ -3,14 +3,11 @@ import { StyleSheet, Image, Dimensions, Animated, TouchableOpacity } from 'react
 import { ScrollView, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { Header, Block, Text } from '../../components';
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import ViewUtil from '../../utils/ViewUtil';
 import Swiper from 'react-native-swiper';
 import { theme } from '../../constants';
-import { Rating, AirbnbRating } from 'react-native-elements';
-
-const WATER_IMAGE = require('../../assets/images/icon.png')
-export default class goodsDetail extends Component {
+import { Rating } from 'react-native-elements';
+export default class GoodsDetail extends Component {
   _renderChangeTab () {
     const tabList = ['商品', '评价', '参数', '详情',]
   }
@@ -252,7 +249,9 @@ export default class goodsDetail extends Component {
       </Block>
       <Block block row center>
         <Text style={styles.add}>加入购物车</Text>
-        <Text style={styles.buy}>立即购买</Text>
+        <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('OrderConfirm')}>
+          <Text style={styles.buy}>立即购买</Text>
+        </TouchableWithoutFeedback>
       </Block>
     </Block>
   }
@@ -324,11 +323,11 @@ export default class goodsDetail extends Component {
             {this._renderScrollTip()}
           </Block>
         </Animated.ScrollView>
-        <Block>
+        {/* <Block>
           <ScrollView showsVerticalScrollIndicator={false}>
             {this._renderDetail()}
           </ScrollView>
-        </Block>
+        </Block> */}
         {this._renderActionArea()}
       </Block>
     )

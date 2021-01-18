@@ -5,7 +5,6 @@ import { theme } from '../constants';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import Tabs from '../common/Tabs'
-import OrderTab from './Order/OrderTab'
 import Swiper1 from 'react-native-swiper';
 
 export default class HomeScreen extends Component {
@@ -19,56 +18,6 @@ export default class HomeScreen extends Component {
       { uri: require('../assets/images/user5.jpg') },
     ]
   }
-  tabOptions = [
-    {
-      name: '全部',
-      component: () => {
-        return <OrderTab {...this.props} />
-      }
-    },
-    {
-      name: '待付款',
-      component: () => {
-        return <OrderTab {...this.props} />
-      }
-    },
-    {
-      name: '待收货',
-      component: () => {
-        return <OrderTab {...this.props} />
-      }
-    },
-    {
-      name: '已完成',
-      component: () => {
-        return <OrderTab {...this.props} />
-      }
-    },
-    {
-      name: '已222完成',
-      component: () => {
-        return <OrderTab {...this.props} />
-      }
-    },
-    {
-      name: '已完333成',
-      component: () => {
-        return <OrderTab {...this.props} />
-      }
-    },
-    {
-      name: '已完33233成',
-      component: () => {
-        return <OrderTab {...this.props} />
-      }
-    },
-    {
-      name: '已完33133成',
-      component: () => {
-        return <OrderTab {...this.props} />
-      }
-    }
-  ]
   _renderTabIcons () {
     const swiperList = [
       [
@@ -141,7 +90,7 @@ export default class HomeScreen extends Component {
             <Block key={index} row space={'between'} padding={[theme.SIZES.base / 2, theme.SIZES.base]}>
               {
                 item.map((icon, index) => (
-                  <Block center>
+                  <Block key={index} center>
                     <Image source={require('../assets/images/3.jpg')} style={{ width: 30, height: 30 }} resizeMode="cover" />
                     <Text caption style={{ marginTop: 4 }}>{icon.label}</Text>
                   </Block>
@@ -184,7 +133,7 @@ export default class HomeScreen extends Component {
         >
           {
             noticeList.map((item, index) => (
-              <Text caption numberOfLines={1} ellipsizeMode="tail" style={{ marginTop: 2 }}>{item.label}</Text>
+              <Text key={index} caption numberOfLines={1} ellipsizeMode="tail" style={{ marginTop: 2 }}>{item.label}</Text>
             ))
           }
         </Swiper1>
@@ -196,12 +145,14 @@ export default class HomeScreen extends Component {
     return content
   }
   _renderMainContent () {
-    const content = <Block style={{backgroundColor: '#fff'}} padding={[0,theme.SIZES.base]}>
+    const content = <Block style={{ backgroundColor: '#fff' }} padding={[0, theme.SIZES.base]}>
       <Block row>
-        <Block style={{width: '50%'}}>
-          <Image source={require('../assets/images/home1.png')} style={{ width: '100%', height: 250 }} resizeMode="cover" />
+        <Block style={{ width: '50%' }}>
+          <TouchableWithoutFeedback onPress={() => { this.props.navigation.navigate('GoodsDetail') }}>
+            <Image source={require('../assets/images/home1.png')} style={{ width: '100%', height: 250 }} resizeMode="cover" />
+          </TouchableWithoutFeedback>
         </Block>
-        <Block style={{width: '50%'}} column>
+        <Block style={{ width: '50%' }} column>
           <Image source={require('../assets/images/home2.png')} style={{ width: '100%', height: 125 }} resizeMode="cover" />
           <Image source={require('../assets/images/home3.jpg')} style={{ width: '100%', height: 125 }} resizeMode="cover" />
         </Block>
@@ -220,9 +171,42 @@ export default class HomeScreen extends Component {
   _renderCategoryGoods () {
     return <Tabs />
   }
-  showModal () {
-    this.props.navigation.navigate('GoodsDetail')
-    // this.refs.toast.show();
+  _renderSearchBar () {
+    return <TouchableWithoutFeedback>
+      <SearchBar
+        onInput={false}
+        onPress={() => this.props.navigation.navigate('Search')}
+        placeholder="请输入..."
+      />
+    </TouchableWithoutFeedback>
+  }
+  _renderLeftContent () {
+    return <TouchableWithoutFeedback>
+      <Ionicons
+        name={'scan-outline'}
+        size={theme.SIZES.icon}
+        style={{ color: theme.COLORS.black }}
+      />
+    </TouchableWithoutFeedback>
+  }
+  _renderRightContent () {
+    return <Block row center>
+      <TouchableWithoutFeedback
+      >
+        <Ionicons
+          name={'gift-outline'}
+          size={theme.SIZES.icon}
+          style={{ color: theme.COLORS.black }}
+        />
+      </TouchableWithoutFeedback>
+      <TouchableWithoutFeedback>
+        <Ionicons
+          name={'chatbubble-ellipses-outline'}
+          size={theme.SIZES.icon}
+          style={{ color: theme.COLORS.black, marginLeft: theme.SIZES.base / 2 }}
+        />
+      </TouchableWithoutFeedback>
+    </Block>
   }
   render () {
     const statusBar = {
@@ -235,43 +219,9 @@ export default class HomeScreen extends Component {
         <Header
           style={{ backgroundColor: '#fff' }}
           statusBar={statusBar}
-          searchInput={
-            <TouchableWithoutFeedback>
-              <SearchBar
-                onInput={false}
-                onPress={() => this.props.navigation.navigate('Search')}
-                placeholder="请输入..."
-              />
-            </TouchableWithoutFeedback>
-          }
-          leftContent={
-            <TouchableWithoutFeedback>
-              <Ionicons
-                name={'scan-outline'}
-                size={theme.SIZES.icon}
-                style={{ color: theme.COLORS.black }}
-              />
-            </TouchableWithoutFeedback>
-          }
-          rightContent={
-            <Block row center>
-              <TouchableWithoutFeedback
-              >
-                <Ionicons
-                  name={'gift-outline'}
-                  size={theme.SIZES.icon}
-                  style={{ color: theme.COLORS.black }}
-                />
-              </TouchableWithoutFeedback>
-              <TouchableWithoutFeedback>
-                <Ionicons
-                  name={'chatbubble-ellipses-outline'}
-                  size={theme.SIZES.icon}
-                  style={{ color: theme.COLORS.black, marginLeft: theme.SIZES.base / 2 }}
-                />
-              </TouchableWithoutFeedback>
-            </Block>
-          }
+          searchInput={this._renderSearchBar()}
+          leftContent={this._renderLeftContent()}
+          rightContent={this._renderRightContent()}
         />
         <Block style={{ backgroundColor: '#fff' }} padding={[theme.SIZES.base / 2, 0]}>
           <Block style={{ height: 140 }} row >
@@ -281,10 +231,6 @@ export default class HomeScreen extends Component {
         {this._renderTabIcons()}
         {this._renderNotice()}
         {this._renderMainContent()}
-        {/* <Button onPress={() => this.showModal()}>
-          <Text>Modal</Text>
-        </Button> */}
-        {/* <Modal ref="toast" position={this.state.position}/> */}
         <Block block margin={[theme.SIZES.base, 0]}>
           {this._renderCategoryGoods()}
         </Block>

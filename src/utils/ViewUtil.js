@@ -43,7 +43,17 @@ export default class ViewUtil {
     return <TouchableWithoutFeedback
       onPress={callback}>
       <Ionicons
-        name={'return-down-back-outline'}
+        name={'chevron-back-outline'}
+        size={theme.SIZES.icon}
+        style={{ color }} />
+    </TouchableWithoutFeedback>;
+  }
+
+  static getRightBackButton (callback, color) {
+    return <TouchableWithoutFeedback
+      onPress={callback}>
+      <Ionicons
+        name={'chevron-forward-outline'}
         size={theme.SIZES.icon}
         style={{ color }} />
     </TouchableWithoutFeedback>;
@@ -67,21 +77,39 @@ export default class ViewUtil {
      * @param callback
      * @returns {XML}
      */
-  static getShareButton (callback) {
+  static getShareButton (callback, color) {
     return <TouchableWithoutFeedback
       underlayColor={'transparent'}
       onPress={callback}
     >
       <Ionicons
-        name={'md-share'}
-        size={theme.SIZES.base}
-        style={{ opacity: 0.9, marginRight: 10, color: 'white' }} />
+        name={'share-outline'}
+        size={theme.SIZES.icon}
+        style={{ color }} />
     </TouchableWithoutFeedback>;
   }
+   /**
+     * 获取更多按钮
+     * @param callback
+     * @returns {XML}
+     */
+    static getMoreButton (callback, color) {
+      return <TouchableWithoutFeedback
+        underlayColor={'transparent'}
+        onPress={callback}
+      >
+        <Ionicons
+          name={'ellipsis-horizontal'}
+          size={theme.SIZES.icon}
+          style={{ color }} />
+      </TouchableWithoutFeedback>;
+    }
 }
+ 
 
 const styles = StyleSheet.create({
   setting_item_container: {
+    // alignSelf
     paddingHorizontal: theme.SIZES.base,
     height: 44,
     alignItems: 'center',

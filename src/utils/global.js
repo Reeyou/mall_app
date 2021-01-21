@@ -2,10 +2,10 @@
 /**
  * 全局变量配置
  */
-import utils from './utils'
+import Utils from './utils'
 import ViewUtil from './ViewUtil'
 import { theme } from '../constants'
 
-global._utils = utils
+global._utils = Utils
 global.theme = theme
 global.ViewUtil = ViewUtil

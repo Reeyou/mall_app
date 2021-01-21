@@ -63,7 +63,7 @@ export default class SearchResult extends Component {
               <Block row padding={[theme.SIZES.base / 4, 0]}>
                 {
                   item.goods_promotion && item.goods_promotion.map(pro => {
-                    return <Text small accent style={styles.item_border}>{pro}</Text>
+                    return <Text key={pro} small accent style={styles.item_border}>{pro}</Text>
                   })
                 }
               </Block>
@@ -99,8 +99,8 @@ export default class SearchResult extends Component {
               </Block>
               <Block row padding={[theme.SIZES.base / 4, 0]}>
                 {
-                  item.goods_promotion && item.goods_promotion.map(pro => {
-                    return <Text small accent style={styles.item_border}>{pro}</Text>
+                  item.goods_promotion && item.goods_promotion.map((pro, index) => {
+                    return <Text key={pro} small accent style={styles.item_border}>{pro}</Text>
                   })
                 }
               </Block>

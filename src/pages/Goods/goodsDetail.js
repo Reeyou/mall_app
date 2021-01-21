@@ -198,7 +198,6 @@ export default class GoodsDetail extends Component {
                 />
               ))
             }
-
           </ScrollView>
           <Text small black1>亮黑色,8GB+256GB</Text>
         </Block>
@@ -230,15 +229,15 @@ export default class GoodsDetail extends Component {
     </Block>
   }
   _renderActionArea () {
-    return <Block row center style={styles.detail_cart} padding={[0, theme.SIZES.base]}>
-      <Block column>
+    return <Block block row center style={styles.detail_cart} padding={[0, theme.SIZES.base]}>
+      <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Home')}>
         <Ionicons
           name={'home-outline'}
           size={theme.SIZES.icon}
           style={{ color: theme.COLORS.black }}
         />
         <Text small black>首页</Text>
-      </Block>
+      </TouchableWithoutFeedback>
       <Block column center padding={[0, theme.SIZES.base]}>
         <Ionicons
           name={'cart-outline'}
@@ -247,10 +246,18 @@ export default class GoodsDetail extends Component {
         />
         <Text small black>购物车</Text>
       </Block>
-      <Block block row center>
-        <Text style={styles.add}>加入购物车</Text>
-        <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('OrderConfirm')}>
-          <Text style={styles.buy}>立即购买</Text>
+      <Block block row center middle padding={[theme.SIZES.base, 0]}>
+        <TouchableWithoutFeedback
+          style={styles.add}
+          onPress={() => { }}
+        >
+          <Text white>加入购物车</Text>
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback
+          style={styles.buy}
+          onPress={() => this.props.navigation.navigate('OrderConfirm')}
+        >
+          <Text white>立即购买</Text>
         </TouchableWithoutFeedback>
       </Block>
     </Block>
@@ -408,20 +415,18 @@ const styles = StyleSheet.create({
   add: {
     backgroundColor: theme.COLORS.primary,
     color: 'white',
-    flex: 1,
     textAlign: 'center',
     paddingVertical: 10,
-    paddingHorizontal: 18,
+    paddingHorizontal: 30,
     borderTopLeftRadius: 20,
     borderBottomLeftRadius: 20,
   },
   buy: {
-    flex: 1,
     backgroundColor: '#ca101d',
     color: 'white',
     textAlign: 'center',
     paddingVertical: 10,
-    paddingHorizontal: 18,
+    paddingHorizontal: 30,
     borderTopRightRadius: 20,
     borderBottomRightRadius: 20,
   },

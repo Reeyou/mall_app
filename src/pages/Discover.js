@@ -9,7 +9,7 @@ import Spinner from 'react-native-spinkit'
 import OrderItem from './Order/OrderTab'
 import { theme } from '../constants';
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { TouchableNativeFeedback, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const Tab = createMaterialTopTabNavigator();
 class recommend extends Component {
@@ -76,7 +76,9 @@ class recommend extends Component {
   }
   render () {
     return (
-      <ScrollView>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+      >
         {this.renderIconTab()}
         {this._renderNews()}
       </ScrollView>
@@ -120,7 +122,7 @@ export default class DiscoverScreen extends Component {
       <Text title bold>发现</Text>
     );
   }
-  getRightButton () {
+  _renderRightContent () {
     return (
       <Block row center>
         <TouchableOpacity onPress={() => { }}>
@@ -130,13 +132,13 @@ export default class DiscoverScreen extends Component {
             style={{ color: theme.COLORS.black }}
           />
         </TouchableOpacity>
-        <TouchableNativeFeedback>
+        <TouchableWithoutFeedback>
           <Image
             style={{ width: theme.SIZES.icon, marginLeft: 10, height: theme.SIZES.icon, borderRadius: theme.SIZES.icon }}
             source={require('../assets/images/12.png')}
             resizeMode="cover"
           />
-        </TouchableNativeFeedback>
+        </TouchableWithoutFeedback>
       </Block>
     );
   }
@@ -151,7 +153,7 @@ export default class DiscoverScreen extends Component {
       <Block block>
         <Header status={statusBar}
           leftContent={this._renderLeftContent()}
-          rightContent={this.getRightButton()}
+          rightContent={this._renderRightContent()}
           style={{ backgroundColor: '#fff' }}
         />
 

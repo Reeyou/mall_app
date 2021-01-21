@@ -228,10 +228,13 @@ export default class User extends Component {
       <View style={styles.order_container}>
         <View style={styles.order_header}>
           <Text style={{ color: '#000', fontWeight: 'bold' }}>我的订单</Text>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <TouchableWithoutFeedback
+            style={{ flexDirection: 'row', alignItems: 'center' }}
+            onPress={() => this.props.navigation.navigate('Order')}
+          >
             <Text style={{ fontSize: 12 }}>全部订单</Text>
             <AntDesign name={'right'} size={12} style={{ color: '#aaa' }} />
-          </View>
+          </TouchableWithoutFeedback>
         </View>
         <View style={styles.order_item_container}>
           {orderArray.map((item, index) => (
@@ -243,7 +246,6 @@ export default class User extends Component {
             </View>
           ))}
         </View>
-
         <Swiper style={{ marginTop: 20 }} swiperList={this.state.swiperList} />
       </View>
     );

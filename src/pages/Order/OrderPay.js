@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 import { StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { Header, SearchBar, Block, Text } from '../../components';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import ViewUtil from '../../utils/ViewUtil';
-import { theme } from '../../constants';
-export default class OrderConfirm extends Component {
-  render () {
+
+export default class OrderPay extends Component {
+  render() {
     const statusBar = {
       backgroundColor: 'transparent',
       barStyle: 'dark-content',
@@ -15,7 +14,7 @@ export default class OrderConfirm extends Component {
       <Block>
         <Header status={statusBar}
           leftContent={ViewUtil.getLeftBackButton(() => { }, theme.COLORS.black)}
-          title="确认订单"
+          title="订单支付"
           style={{ backgroundColor: '#fff' }}
         />
       </Block>

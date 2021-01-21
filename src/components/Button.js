@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     borderRadius: SIZES.radius,
     height: SIZES.base * 3,
     justifyContent: "center",
-    marginVertical: SIZES.padding / 3
+    // marginVertical: SIZES.padding / 3
   },
   shadow: {
     shadowColor: COLORS.black,

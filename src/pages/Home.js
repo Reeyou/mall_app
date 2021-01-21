@@ -185,7 +185,7 @@ export default class HomeScreen extends Component {
       <Ionicons
         name={'scan-outline'}
         size={theme.SIZES.icon}
-        style={{ color: theme.COLORS.black }}
+        style={{ color: theme.COLORS.black, marginRight: 10 }}
       />
     </TouchableWithoutFeedback>
   }
@@ -196,7 +196,7 @@ export default class HomeScreen extends Component {
         <Ionicons
           name={'gift-outline'}
           size={theme.SIZES.icon}
-          style={{ color: theme.COLORS.black }}
+          style={{ color: theme.COLORS.black, marginLeft: 10 }}
         />
       </TouchableWithoutFeedback>
       <TouchableWithoutFeedback>
@@ -215,7 +215,10 @@ export default class HomeScreen extends Component {
       translucent: true
     };
     return (
-      <ScrollView stickyHeaderIndices={[0]}>
+      <ScrollView
+        stickyHeaderIndices={[0]}
+        showsVerticalScrollIndicator={false}
+      >
         <Header
           style={{ backgroundColor: '#fff' }}
           statusBar={statusBar}

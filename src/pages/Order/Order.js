@@ -48,7 +48,7 @@ export default class Order extends Component {
           title={"订单中心"}
           style={{ backgroundColor: '#fff' }}
           statusBar={statusBar}
-          leftContent={ViewUtil.getLeftBackButton(() => _utils.goBack(this.props.navigation), theme.COLORS.black)}
+          leftContent={ViewUtil.getLeftBackButton(() => _utils.goBack(this.props.navigation))}
         />
         <Block block>
           {this.tabs.render(this.tabOptions)}

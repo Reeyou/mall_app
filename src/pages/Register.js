@@ -12,7 +12,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import { Header, Button, Block, Input, Text, Toast } from "../components";
 import { theme } from "../constants";
 import { StackActions } from '@react-navigation/native';
-import {getCode} from '../api/auth'
+import { getCode } from '../api/auth'
 
 const popAction = StackActions.pop(1);
 const timer = 60
@@ -30,7 +30,7 @@ export default class Register extends Component {
     codeSendTime: timer,
     position: 'top'
   };
-  componentWillUnmount() {
+  componentWillUnmount () {
     clearInterval(_timer)
   }
   handleSignUp () {
@@ -66,17 +66,6 @@ export default class Register extends Component {
       );
     }
   }
-  _renderLeftContent () {
-    return (
-      <TouchableOpacity onPress={() => this.props.navigation.dispatch(popAction)}>
-        <Ionicons
-          name={'return-down-back-outline'}
-          size={22}
-          style={{ color: '#333', marginLeft: 10 }}
-        />
-      </TouchableOpacity>
-    );
-  }
   _rightLabel () {
     const { codeLoading, codeVisible } = this.state
     if (!codeLoading && codeVisible) {
@@ -88,9 +77,9 @@ export default class Register extends Component {
     }
   }
   _sendCode () {
-    this.setState({codeLoading: true, codeVisible: false})
-    getCode({email: '978403496@qq.com'}).then(res => {
-      if(res.code === 200) {
+    this.setState({ codeLoading: true, codeVisible: false })
+    getCode({ email: '978403496@qq.com' }).then(res => {
+      if (res.code === 200) {
         this.refs.toast.show(res.msg);
         this.setState({
           codeVisible: false,
@@ -111,7 +100,7 @@ export default class Register extends Component {
         })
       } else {
         this.refs.toast.show(res.msg);
-        this.setState({codeLoading: false, codeVisible: true})
+        this.setState({ codeLoading: false, codeVisible: true })
       }
     }).catch(e => {
       console.log(e)
@@ -127,7 +116,10 @@ export default class Register extends Component {
     };
     return (
       <KeyboardAvoidingView style={styles.signup} behavior={Platform.OS == "ios" ? "padding" : "height"}>
-        <Header statusBar={statusBar} leftContent={this._renderLeftContent()} />
+        <Header
+          statusBar={statusBar}
+          leftContent={ViewUtil.getLeftBackButton(() => _utils.goBack(this.props.navigation))}
+        />
         <Block padding={[0, theme.SIZES.base * 2]}>
           <Text h1 bold>
             注册
@@ -192,7 +184,7 @@ export default class Register extends Component {
             </Button>
           </Block>
         </Block>
-        <Toast ref="toast" position={this.state.position}/>
+        <Toast ref="toast" position={this.state.position} />
       </KeyboardAvoidingView>
     );
   }

@@ -41,10 +41,10 @@ export default class LoginScreen extends Component {
 
     if (!errors.length) {
       const params = { username, password }
-      this.setState({loading: true})
+      this.setState({ loading: true })
       login(params).then(res => {
         console.log(res)
-        this.setState({loading: false})
+        this.setState({ loading: false })
         if (res.code === 200) {
           this.refs.toast.show(res.msg);
           AsyncStorage.setItem('userinfo', JSON.stringify(res.data))
@@ -58,17 +58,6 @@ export default class LoginScreen extends Component {
       })
     }
   }
-  _renderLeftContent () {
-    return (
-      <TouchableOpacity onPress={() => this.props.navigation.dispatch(popAction)}>
-        <Ionicons
-          name={'return-down-back-outline'}
-          size={22}
-          style={{ color: '#333', marginLeft: 10 }}
-        />
-      </TouchableOpacity>
-    );
-  }
   render () {
     const { navigation } = this.props;
     const { loading, errors } = this.state;
@@ -79,7 +68,10 @@ export default class LoginScreen extends Component {
     };
     return (
       <KeyboardAvoidingView style={styles.login} behavior={Platform.OS == "ios" ? "padding" : "height"}>
-        <Header statusBar={statusBar} leftContent={this._renderLeftContent()} />
+        <Header
+          statusBar={statusBar}
+          leftContent={ViewUtil.getLeftBackButton(() => _utils.goBack(this.props.navigation))}
+        />
         <Block block padding={[0, theme.SIZES.base * 2]}>
           <Text h1 bold>
             登录

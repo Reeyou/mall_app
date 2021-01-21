@@ -40,17 +40,6 @@ export default class Web extends Component {
     this.onBack();
     return true;
   }
-  _renderLeftContent () {
-    return (
-      <TouchableOpacity onPress={() => this.onBackPress()}>
-        <Ionicons
-          name={'return-down-back-outline'}
-          size={theme.SIZES.base * 1.5}
-          style={{ color: theme.COLORS.black }}
-        />
-      </TouchableOpacity>
-    );
-  }
   onNavigationStateChange (navState) {
     console.log(navState)
     this.setState({
@@ -76,7 +65,7 @@ export default class Web extends Component {
         <Header
           title={this.state.title}
           statusBar={statusBar}
-          leftContent={this._renderLeftContent()}
+          leftContent={ViewUtil.getLeftBackButton(() => this.onBackPress())}
           style={{ backgroundColor: '#fff' }}
         />
         <WebView

@@ -6,6 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import { theme } from '../../constants'
 import { SETTING_MENU } from '../../config'
 import BaseItem from '../../common/BaseItem'
+import ViewUtil from '../../utils/ViewUtil';
 
 export default class Setting extends Component {
   state = {
@@ -50,17 +51,6 @@ export default class Setting extends Component {
     }
   }
 
-  _renderLeftContent () {
-    return (
-      <TouchableOpacity onPress={() => _utils.goBack(this.props.navigation)}>
-        <Ionicons
-          name={'return-down-back-outline'}
-          size={theme.SIZES.base * 1.5}
-          style={{ color: theme.COLORS.black }}
-        />
-      </TouchableOpacity>
-    );
-  }
   handleClick (val) {
     console.log(val)
     switch (val.label) {
@@ -118,7 +108,7 @@ export default class Setting extends Component {
           title={"账户设置"}
           style={{ backgroundColor: '#fff' }}
           statusBar={statusBar}
-          leftContent={this._renderLeftContent()}
+          leftContent={ViewUtil.getLeftBackButton(() => _utils.goBack(this.props.navigation))}
         />
 
         <Block color={'white'} radius={[0, theme.SIZES.radius]}>

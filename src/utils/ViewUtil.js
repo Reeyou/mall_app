@@ -39,7 +39,7 @@ export default class ViewUtil {
     * @param callback
     * @returns {XML}
     */
-  static getLeftBackButton (callback, color) {
+  static getLeftBackButton (callback, color = theme.COLORS.black) {
     return <TouchableWithoutFeedback
       onPress={callback}>
       <Ionicons

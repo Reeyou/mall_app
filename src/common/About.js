@@ -39,17 +39,6 @@ export default class About {
   //       console(e);
   //     });
   // }
-  _renderLeftContent () {
-    return (
-      <TouchableWithoutFeedback onPress={() => this.props.navigation.dispatch(popAction)}>
-        <Ionicons
-          name={'return-down-back-outline'}
-          size={theme.SIZES.base * 1.5}
-          style={{ color: theme.COLORS.black }}
-        />
-      </TouchableWithoutFeedback>
-    );
-  }
   render (contentView, params) {
     const statusBar = {
       backgroundColor: '#fff',
@@ -67,7 +56,7 @@ export default class About {
           title={title}
           style={{ backgroundColor: '#fff' }}
           statusBar={statusBar}
-          leftContent={this._renderLeftContent()}
+          leftContent={ViewUtil.getLeftBackButton(() => this.props.navigation.dispatch(popAction))}
         />
         <Block center padding={[theme.SIZES.base * 1.5, 0]}>
           <Image style={[styles.avatar, radiusStyle]}

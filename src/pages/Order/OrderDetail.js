@@ -81,7 +81,7 @@ export default class OrderDetail extends Component {
           title={"订单详情"}
           style={{ backgroundColor: '#fff' }}
           statusBar={statusBar}
-          leftContent={ViewUtil.getLeftBackButton(() => _utils.goBack(this.props.navigation), theme.COLORS.black)}
+          leftContent={ViewUtil.getLeftBackButton(() => _utils.goBack(this.props.navigation))}
         />
         <Block block>
           {this._renderOrderDetail()}

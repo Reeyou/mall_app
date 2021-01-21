@@ -48,15 +48,7 @@ export default class Search extends Component {
           style={{ backgroundColor: '#fff' }}
           statusBar={statusBar}
           searchInput={<SearchBar placeholder="请输入..." />}
-          leftContent={
-            <TouchableWithoutFeedback onPress={() => Utils.goBack(this.props.navigation)}>
-              <Ionicons
-                name={'arrow-back-outline'}
-                size={theme.SIZES.icon}
-                style={{ color: theme.COLORS.black }}
-              />
-            </TouchableWithoutFeedback>
-          }
+          leftContent={ViewUtil.getLeftBackButton(() => _utils.goBack(this.props.navigation))}
           rightContent={
             <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('SearchResult')}>
               <Text>搜索</Text>

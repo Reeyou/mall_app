@@ -13,8 +13,9 @@ export default class OrderConfirm extends Component {
     };
     return (
       <Block>
-        <Header status={statusBar}
-          leftContent={ViewUtil.getLeftBackButton(() => { }, theme.COLORS.black)}
+        <Header
+          status={statusBar}
+          leftContent={ViewUtil.getLeftBackButton(() => { })}
           title="确认订单"
           style={{ backgroundColor: '#fff' }}
         />

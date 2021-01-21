@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Image } from 'react-native'
+import { StyleSheet, Image, ScrollView } from 'react-native'
 import { Block, Text } from '../../components';
 import { theme } from '../../constants';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
@@ -43,13 +43,18 @@ export default class OrderTab extends Component {
   }
   render () {
     return (
-      <Block>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('OrderDetail')}>
           {this._renderOrderItem()}
         </TouchableWithoutFeedback>
         
         {this._renderOrderItem()}
-      </Block>
+        {this._renderOrderItem()}
+        {this._renderOrderItem()}
+        {this._renderOrderItem()}
+        {this._renderOrderItem()}
+        {this._renderOrderItem()}
+      </ScrollView>
     )
   }
 }

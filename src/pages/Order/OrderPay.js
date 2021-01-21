@@ -4,7 +4,7 @@ import { Header, SearchBar, Block, Text } from '../../components';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 export default class OrderPay extends Component {
-  render() {
+  render () {
     const statusBar = {
       backgroundColor: 'transparent',
       barStyle: 'dark-content',
@@ -12,8 +12,9 @@ export default class OrderPay extends Component {
     };
     return (
       <Block>
-        <Header status={statusBar}
-          leftContent={ViewUtil.getLeftBackButton(() => { }, theme.COLORS.black)}
+        <Header
+          status={statusBar}
+          leftContent={ViewUtil.getLeftBackButton(() => { })}
           title="订单支付"
           style={{ backgroundColor: '#fff' }}
         />

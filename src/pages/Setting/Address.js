@@ -13,8 +13,9 @@ export default class Address extends Component {
     };
     return (
       <Block>
-        <Header status={statusBar}
-          leftContent={ViewUtil.getLeftBackButton(() => { }, theme.COLORS.black)}
+        <Header
+          status={statusBar}
+          leftContent={ViewUtil.getLeftBackButton(() => { })}
           title="管理收货地址"
           style={{ backgroundColor: '#fff' }}
         />

@@ -78,8 +78,9 @@ Button.defaultProps = {
 const styles = StyleSheet.create({
   button: {
     borderRadius: SIZES.radius,
-    height: SIZES.base * 3,
+    height: SIZES.base * 2.5,
     justifyContent: "center",
+    width: '100%'
     // marginVertical: SIZES.padding / 3
   },
   shadow: {

@@ -116,7 +116,7 @@ export default class Setting extends Component {
           {this._renderItem(SETTING_MENU.Address, false)}
         </Block>
         <Block color={'white'} card margin={[theme.SIZES.base / 2, 0, 0, 0]}>
-          {this._renderItem(SETTING_MENU.Clear_Cache, false)}
+          {this._renderItem(SETTING_MENU.Clear_Cache)}
           {this._renderItem(SETTING_MENU.About_Author)}
           {this._renderItem(SETTING_MENU.About_App, false)}
         </Block>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Image, Dimensions, Animated, TouchableOpacity } from 'react-native'
+import { StyleSheet, Image, Dimensions, View, Animated, TouchableOpacity, Modal } from 'react-native'
 import { ScrollView, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { Header, Block, Text } from '../../components';
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -7,7 +7,12 @@ import ViewUtil from '../../utils/ViewUtil';
 import Swiper from 'react-native-swiper';
 import { theme } from '../../constants';
 import { Rating } from 'react-native-elements';
+const {width, height} = Dimensions.get('window');
+const data = ['黑色', '白色', '夏日胡杨', '秋日胡杨', '银色', '灰色'];
 export default class GoodsDetail extends Component {
+  state = {
+    skuVisible: false
+  }
   _renderChangeTab () {
     const tabList = ['商品', '评价', '参数', '详情',]
   }
@@ -109,7 +114,12 @@ export default class GoodsDetail extends Component {
       {/* // sku */}
       <Block row center padding={[theme.SIZES.base / 2, theme.SIZES.base]} style={styles.borderBottom}>
         <Text header bold>已选</Text>
-        <Text caption bold style={{ marginLeft: 10, flex: 1 }}>丹霞橙(8+256G)，1件，可选服务</Text>
+        <TouchableOpacity
+          onPress={() => {
+            this.setState({ skuVisible: true });
+          }}>
+          <Text caption bold style={{ marginLeft: 10, flex: 1 }}>丹霞橙(8+256G)，1件，可选服务</Text>
+        </TouchableOpacity>
         <Block style={{ alignSelf: 'flex-start' }}>
           {ViewUtil.getMoreButton(() => { }, theme.COLORS.black1)}
         </Block>
@@ -304,6 +314,66 @@ export default class GoodsDetail extends Component {
       console.log(3)
     }
   }
+  closeModal () {
+    this.setState({
+      skuVisible: false,
+    });
+  }
+  renderDialog() {
+    return (
+      <Block block style={{backgroundColor: 'rgba(0,0,0,.18)'}}>
+        <View style={styles.modalStyle}>
+        <View style={styles.modelHeader}>
+          <Image
+            style={{width: 80, height: 80, backgroundCOlor: '#000'}}
+            source={{
+              uri:
+                'https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/59022/28/10293/141808/5d78088fEf6e7862d/68836f52ffaaad96.jpg!q80.dpg.webp',
+            }}
+          />
+          <View style={styles.modelPrice}>
+            <Text style={styles.propPrice}>4199</Text>
+            <Text style={styles.propSelectLable}>
+              已选：<Text style={styles.propSelectText}>秋日胡杨 128G+64G</Text>
+            </Text>
+          </View>
+        </View>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.propContent}>
+          <View style={styles.propItemContent}>
+            <Text>颜色</Text>
+            <View style={styles.prop}>
+              {data.map((item,index) => {
+                return <Text key={index} style={styles.propItem}>{item}</Text>;
+              })}
+            </View>
+          </View>
+          <View style={styles.propItemContent}>
+            <Text>版本号</Text>
+            <View style={styles.prop}>
+              {data.map((item, index) => {
+                return <Text key={index} style={styles.propItem}>{item}</Text>;
+              })}
+            </View>
+          </View>
+          <View style={styles.propNumberContent}>
+            <Text>数量</Text>
+            <View style={styles.handle}>
+              <Text style={styles.handle_reduce}>——</Text>
+              <Text style={styles.goods_count}>1</Text>
+              <Text style={styles.handle_add}>+</Text>
+            </View>
+          </View>
+        </ScrollView>
+        <View style={styles.modelFooter}>
+          <Text style={styles.add}>加入购物车</Text>
+          <Text style={styles.buy}>立即购买</Text>
+        </View>
+      </View>
+      </Block>
+    );
+  }
   render () {
     const statusBar = {
       backgroundColor: 'transparent',
@@ -336,6 +406,15 @@ export default class GoodsDetail extends Component {
           </ScrollView>
         </Block> */}
         {this._renderActionArea()}
+        <Modal
+          transparent={true}
+          visible={this.state.skuVisible}
+          animationType={'slide'}
+          statusBarTranslucent={true}
+          onRequestClose={() => this.closeModal()}
+        >
+          {this.renderDialog()}
+        </Modal>
       </Block>
     )
   }
@@ -432,5 +511,117 @@ const styles = StyleSheet.create({
   },
   marginTop10: {
     marginTop: 10
-  }
+  },
+  modalStyle: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: width,
+    height: height - 80,
+    backgroundColor: '#ffffff',
+    display: 'flex',
+    flexDirection: 'column',
+    borderTopLeftRadius: 20,
+    borderTopEndRadius: 20,
+    paddingHorizontal: 18,
+  },
+  modelHeader: {
+    display: 'flex',
+    flexDirection: 'row',
+    paddingVertical: 10,
+  },
+  propContent: {
+    flex: 1,
+    paddingTop: 14,
+  },
+  propItemContent: {
+    paddingBottom: 14,
+  },
+  prop: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    flexWrap: 'wrap',
+  },
+  propItem: {
+    paddingVertical: 8,
+    paddingHorizontal: 20,
+    borderRadius: 50,
+    borderColor: 'red',
+    // borderWidth: 1,
+    // borderStyle: 'solid',
+    backgroundColor: '#f7f7f7',
+    marginRight: 14,
+    marginTop: 14,
+    fontSize: 12,
+  },
+  modelPrice: {
+    alignSelf: 'flex-end',
+  },
+  propPrice: {
+    fontSize: 20,
+    color: 'red',
+  },
+  propSelectLable: {
+    fontSize: 12,
+    color: '#666',
+  },
+  propSelectText: {
+    fontSize: 12,
+    color: '#333',
+  },
+  modelText: {
+    fontSize: 40,
+  },
+  modelFooter: {
+    width: '100%',
+    height: 60,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  propNumberContent: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: 24,
+    // height: 20,
+  },
+  handle: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    justifyContent: 'flex-end',
+  },
+  handle_reduce: {
+    width: 20,
+    height: 20,
+    textAlign: 'center',
+    color: '#ccc',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: '#eee',
+    borderRadius: 50,
+  },
+  handle_add: {
+    width: 20,
+    height: 20,
+    textAlign: 'center',
+    color: '#333',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: '#eee',
+    borderRadius: 50,
+  },
+  goods_count: {
+    width: 20,
+    height: 20,
+    lineHeight: 20,
+    fontSize: 12,
+    textAlign: 'center',
+    color: '#333',
+    borderRadius: 2,
+  },
 })
